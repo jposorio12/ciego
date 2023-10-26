@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("./Assets/arrowSelect.png");
+  background-repeat: no-repeat;
+  background-position: right 0.7rem top 50%;
+  background-size: 24px auto;
+}
