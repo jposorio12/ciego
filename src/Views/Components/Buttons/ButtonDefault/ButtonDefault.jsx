@@ -4,6 +4,7 @@ const ButtonDefault = ({
   iconLeft,
   classNameButton,
   classNameSpan,
+  classNameIcon,
   disabled,
   onClick,
 }) => {
@@ -15,7 +16,7 @@ const ButtonDefault = ({
     >
       {iconLeft && <img src={iconLeft} alt="icon" />}
       <span className={classNameSpan}>{text}</span>
-      {icon && <img src={icon} alt="icon" />}
+      {icon && <img src={icon} alt="icon" className={classNameIcon} />}
     </button>
   );
 };

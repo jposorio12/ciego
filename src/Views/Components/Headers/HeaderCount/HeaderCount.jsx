@@ -12,14 +12,14 @@ const HeaderCount = () => {
 
   return (
     <header className="bg-[#0C2047]">
-      <div className="flex justify-between p-[16px] max-w-[400px] mx-auto">
+      <div className="flex justify-between items-center p-[16px] max-w-[400px] mx-auto">
         <img src={arrow} alt="icon" className="cursor-pointer" />
-        <img src={logo} alt="icon" />
+        <img src={logo} alt="icon" className="w-auto h-[20px]" />
         <img src={logout} alt="icon" className="cursor-pointer" />
       </div>
       <div className="flex mx-auto max-w-[400px] px-[16px] pt-[10px] pb-[16px] items-center">
         <img src={time} alt="icon" className="mr-[8px] h-[24px] w-[24px]" />
-        <div className="mr-[50px]">
+        <div className="mr-[30px]">
           <h4 className="font-inter font-bold text-[10px] text-white">
             <span className="block">{date?.first}</span>
             <span>{date?.second} (GMT-4)</span>

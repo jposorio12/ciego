@@ -4,7 +4,7 @@ const PublicLayout = ({ children, iconGoBack }) => {
   const navigate = useNavigate();
 
   return (
-    <main className="bg-black min-h-screen w-full pb-[30px]">
+    <main className="bg-background bg-cover min-h-screen w-full pb-[30px]">
       {iconGoBack && (
         <img
           src={iconGoBack}

@@ -7,17 +7,18 @@ const Filter = ({
   classNameSection,
   activeOnFocus,
   onClickIcon,
+  handleChange,
 }) => {
   const { useFilterCount } = useComponentsControllers();
   const { handleBlockIfNumber, navigate } = useFilterCount();
 
   return (
     <section
-      className={`px-[16px] py-[8px] max-w-[400px] mx-auto ${classNameSection}`}
+      className={`mx-auto px-[16px] py-[8px] max-w-[400px] ${classNameSection}`}
     >
       <div className="flex items-center justify-center gap-[4px]">
         <div
-          className={`bg-white rounded-[80px] w-full h-[40px] flex px-[16px] py-[8px] gap-[8px] ${classNameContainer}`}
+          className={`flex w-full bg-white rounded-[80px] h-[40px] px-[16px] py-[8px] gap-[8px] ${classNameContainer}`}
         >
           <img src={lupe} alt="icon" className="h-[24px] w-[24px]" />
           <input
@@ -25,13 +26,14 @@ const Filter = ({
             className="outline-none placeholder:font-inter placeholder:font-normal placeholder:text-[14px] placeholder:text-[#4D4D4D]"
             onKeyDown={handleBlockIfNumber}
             placeholder="Buscar conteo..."
+            onChange={handleChange}
             onFocus={() => !activeOnFocus && navigate("/search")}
           />
         </div>
         <img
           src={icon}
           alt="icon"
-          className="h-[32px] w-[32px] cursor-pointer"
+          className={`h-[32px] w-[32px] ${activeOnFocus && "cursor-pointer"}`}
           onClick={() => onClickIcon && onClickIcon()}
         />
       </div>

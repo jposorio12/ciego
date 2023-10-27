@@ -16,6 +16,7 @@ const InputDefault = ({
   updateValue,
   icon,
   iconRight,
+  iconEye,
   errors,
 }) => {
   const [typeInput, setTypeInput] = useState(true);
@@ -66,7 +67,7 @@ const InputDefault = ({
               />
               {iconRight && (
                 <img
-                  src={iconRight}
+                  src={name === "password" && !typeInput ? iconEye : iconRight}
                   onClick={() => {
                     if (name === "password") {
                       setTypeInput((prev) => !prev);

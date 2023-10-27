@@ -30,12 +30,13 @@ const Count = () => {
           <CardCount
             numberRoute={500774}
             date="22/08/23"
-            state="En progreso"
+            state={3}
             lastUpdate="22/08/23"
             numberDriver="402-13091990"
             truckSheet={2435}
             plaque="L337500"
             driver="El choquito"
+            onClick={() => navigate("/detail/1")}
           />
         ) : (
           <div className="w-[80%] max-w-[400px] mx-auto">

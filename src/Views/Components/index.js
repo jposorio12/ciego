@@ -11,10 +11,11 @@ import useModals from "./Modals";
 const useComponents = () => {
   const { InputDefault, SelectDefault, InputAddCount } = useInputs();
   const { ButtonDefault } = useButtons();
-  const { HeaderCount, HeaderDetail } = useHeaders();
-  const { CardCount, CardSkuCount } = useCards();
-  const { StepOne, StepTwo } = useSteps();
-  const { ModalBay, ModalBayCount } = useModals();
+  const { HeaderCount, HeaderDetail, HeaderDetailId } = useHeaders();
+  const { CardCount, CardSkuCount, CardSkuSuccesful } = useCards();
+  const { StepOne, StepTwo, StepThree } = useSteps();
+  const { ModalBay, ModalBayCount, ModalDetailId, ModalCancelCount } =
+    useModals();
 
   return {
     InputDefault,
@@ -23,15 +24,20 @@ const useComponents = () => {
     ButtonDefault,
     HeaderCount,
     HeaderDetail,
+    HeaderDetailId,
     CardCount,
     CardSkuCount,
+    CardSkuSuccesful,
     WifiIcon,
     Filter,
     StatusLine,
     StepOne,
     StepTwo,
+    StepThree,
     ModalBay,
     ModalBayCount,
+    ModalDetailId,
+    ModalCancelCount,
   };
 };
 

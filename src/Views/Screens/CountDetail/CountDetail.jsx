@@ -4,7 +4,8 @@ import useScreenControllers from "../../../Controllers/ScreenControllers";
 
 const CountDetail = () => {
   const { PrivateLayout } = useLayouts();
-  const { HeaderDetail, StatusLine, StepOne, StepTwo } = useComponents();
+  const { HeaderDetail, StatusLine, StepOne, StepTwo, StepThree } =
+    useComponents();
 
   const { useCountDetail } = useScreenControllers();
   const { CountDetailForm, step } = useCountDetail();
@@ -24,6 +25,7 @@ const CountDetail = () => {
       {step === 2 && (
         <StepTwo form={{ handleSubmit, control, errors, isValid }} />
       )}
+      {step === 3 && <StepThree />}
     </PrivateLayout>
   );
 };

@@ -36,7 +36,7 @@ const useHeaderCount = () => {
     const day = now.getDate();
     const hour = now.getHours() % 12 || 12;
     const amPm = now.getHours() >= 12 ? "PM" : "AM";
-    const minute = now.getMinutes();
+    const minute = now.getMinutes()?.toString()?.padStart("2", 0);
     const dayWeek = days[now.getDay()];
     setDate({
       first: `${dayWeek}, ${day} de ${month} de ${year},`,

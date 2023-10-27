@@ -6,6 +6,7 @@ import arrow from "../../../Assets/ArrowRight.png";
 import arrowDisable from "../../../Assets/ArrowRightDisable.png";
 import check from "../../../Assets/arrowCheck.png";
 import hide from "../../../Assets/eyeOff.png";
+import eyeOn from "../../../Assets/Eye.png";
 import atentionSign from "../../../Assets/atentionSignLogin.png";
 import useComponents from "../../Components";
 import useScreenControllers from "../../../Controllers/ScreenControllers";
@@ -82,6 +83,7 @@ const Login = () => {
           placeholder="Ingresa tu contraseña"
           icon={lock}
           iconRight={hide}
+          iconEye={eyeOn}
           updateValue={updateValuePassword}
           errors={errors}
         />

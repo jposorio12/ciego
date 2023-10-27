@@ -11,6 +11,9 @@ module.exports = {
         buttonCount:
           "0px 8px 16px 0px rgba(0, 0, 0, 0.24), 0px 2px 4px 0px rgba(0, 0, 0, 0.16)",
       },
+      backgroundImage: {
+        background: "url('./src/Assets/BG.png')",
+      },
     },
   },
   plugins: [],
