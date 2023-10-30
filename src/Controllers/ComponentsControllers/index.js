@@ -4,6 +4,7 @@ import useHeaderDetail from "./useHeaderDetail";
 import useStatusLine from "./useStatusLine";
 import useStepOne from "./useStepOne";
 import useStepTwo from "./useStepTwo";
+import useStepThree from "./useStepThree";
 import useCardCount from "./useCardCount";
 
 const useComponentsControllers = () => {
@@ -14,6 +15,7 @@ const useComponentsControllers = () => {
     useStatusLine,
     useStepOne,
     useStepTwo,
+    useStepThree,
     useCardCount,
   };
 };

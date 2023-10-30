@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useComponents from "../..";
-import save from "../../../../Assets/saveDisabled.png";
+import saveDisabled from "../../../../Assets/saveDisabled.png";
+import save from "../../../../Assets/saveEnabled.png";
 import close from "../../../../Assets/Clear.png";
 
 const ModalBay = ({
@@ -46,7 +47,7 @@ const ModalBay = ({
                 setSelected(bay);
                 setValue("bay", bay);
               }}
-              className={`w-[148px] h-[55px] rounded-[16px] p-[8px] border-[2px] border-solid border-[#19418E] 
+              className={`w-[148px] h-[55px] rounded-[16px] p-[8px] border-[2px] border-solid border-[#19418E] cursor-pointer 
               ${
                 selected === bay ? "bg-[#19418E]" : "bg-[#EAF0FB]"
               } flex items-center justify-center`}
@@ -61,12 +62,18 @@ const ModalBay = ({
             </div>
           ))}
         </div>
+
         <ButtonDefault
           text="Guardar"
-          icon={save}
-          classNameButton="w-[90%] max-w-[400px] bg-[#E8E8E8] h-[64px] rounded-[32px] flex mt-[42px] mb-[32px]
-        items-center justify-center gap-[16px] mx-auto"
-          classNameSpan="font-inter font-bold text-[18px] text-[#A6A6A6]"
+          icon={selected?.length > 0 ? save : saveDisabled}
+          disabled={!selected.length > 0}
+          classNameButton={`w-[90%] max-w-[400px] ${
+            selected?.length > 0 ? "bg-[#19418E]" : "bg-[#E8E8E8]"
+          } h-[64px] rounded-[32px] flex mt-[42px] mb-[32px]
+        items-center justify-center gap-[16px] mx-auto`}
+          classNameSpan={`font-inter font-bold text-[18px] ${
+            selected?.length > 0 ? "text-white" : "text-[#A6A6A6]"
+          }`}
           onClick={() => {
             setOpenBay(false);
             setOpenBayCount(true);

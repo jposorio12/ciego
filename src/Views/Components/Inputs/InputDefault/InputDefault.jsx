@@ -18,6 +18,7 @@ const InputDefault = ({
   iconRight,
   iconEye,
   errors,
+  inputCreate,
 }) => {
   const [typeInput, setTypeInput] = useState(true);
   const error = errors[name]?.message;
@@ -44,6 +45,10 @@ const InputDefault = ({
             <div
               className={`${classNameContainerInput} ${
                 error && "border-[#FF1130]"
+              } ${
+                (value || valueForm) &&
+                inputCreate &&
+                "!border-[#19418E] bg-[#D3EFFF33] border-[2px]"
               }`}
             >
               {icon && (

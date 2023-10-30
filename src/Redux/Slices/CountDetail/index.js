@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  id: 0,
+  id: 1,
   counts: [],
 };
 
@@ -12,7 +12,7 @@ export const CountDetailSlice = createSlice({
     updateForm(state, { payload }) {
       return {
         ...state,
-        counts: [...state.counts, payload],
+        counts: payload,
       };
     },
     updateId(state, { payload }) {

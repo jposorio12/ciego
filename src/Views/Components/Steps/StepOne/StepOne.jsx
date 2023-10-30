@@ -3,17 +3,28 @@ import arrow from "../../../../Assets/ArrowRightDisable.png";
 import arrowEnabled from "../../../../Assets/ArrowRightWhite.png";
 import useComponentsControllers from "../../../../Controllers/ComponentsControllers";
 
-const StepOne = ({ form }) => {
+const StepOne = ({ form, steps }) => {
   const { handleSubmit, control, errors, isValid } = form;
+  const { setStep } = steps;
   const { SelectDefault, InputDefault, ButtonDefault } = useComponents();
   const { useStepOne } = useComponentsControllers();
-  const { submitForm } = useStepOne();
+  const { submitForm, date } = useStepOne(setStep);
 
   return (
     <form
       className="max-w-[400px] mx-auto px-[16px]"
       onSubmit={handleSubmit(submitForm)}
     >
+      <h2 className="font-inter font-bold text-[20px] text-[#3D73DD] mt-[10px]">
+        Ingreso de datos conteo
+      </h2>
+      <h3 className="font-inter font-bold text-[14px] text-[#0C2047]">
+        Fecha y hora de creación
+      </h3>
+      <h4 className="font-inter font-normal text-[12px] text-[#202020] mb-[10px]">
+        {date?.first} {date?.second} (GMT-4)
+      </h4>
+
       <SelectDefault
         label={
           <span className="font-inter font-bold text-[14px] text-[#0C2047]">
@@ -68,8 +79,9 @@ const StepOne = ({ form }) => {
         }
         classNameContainer="mt-[8px] w-full"
         classNameContainerInput="p-[8px] border-[1px] border-solid border-[#A6A6A6] rounded-[4px] mt-[4px]"
-        classNameInput="w-full outline-none"
+        classNameInput="w-full outline-none placeholder:text-black"
         placeholder="Ingresa el número del transportador"
+        inputCreate
         errors={errors}
       />
       <SelectDefault
@@ -98,9 +110,10 @@ const StepOne = ({ form }) => {
         }
         classNameContainer="mt-[8px] w-full"
         classNameContainerInput="p-[8px] border-[1px] border-solid border-[#A6A6A6] rounded-[4px] mt-[4px]"
-        classNameInput="w-full outline-none"
+        classNameInput="w-full outline-none placeholder:text-black"
         placeholder="Ingresa el número del transportador"
         errors={errors}
+        inputCreate
       />
       <InputDefault
         control={control}
@@ -114,9 +127,10 @@ const StepOne = ({ form }) => {
         }
         classNameContainer="mt-[8px] w-full"
         classNameContainerInput="p-[8px] border-[1px] border-solid border-[#A6A6A6] rounded-[4px] mt-[4px]"
-        classNameInput="w-full outline-none"
+        classNameInput="w-full outline-none placeholder:text-black"
         placeholder="Ingresa el número del transportador"
         errors={errors}
+        inputCreate
       />
       <ButtonDefault
         disabled={!isValid}

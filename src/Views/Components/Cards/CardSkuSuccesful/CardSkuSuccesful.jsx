@@ -20,15 +20,15 @@ const CardSkuSuccesful = ({
       <img src={check} alt="edit icon" className="h-[24px] w-[24px]" />
       <div className="flex flex-col grow">
         <div className="flex gap-[8px] mb-[10px] justify-between">
-          <div>
+          <div className="w-[40%] sm:w-[50%] flex flex-col flex-wrap">
             <h4 className="font-inter font-bold text-[10px] text-[#016399] mb-[10px]">
               SKU
             </h4>
-            <h5 className="font-inter font-bold text-[14px] text-[#202020]">
+            <h5 className="font-inter font-bold text-[14px] text-[#202020] break-all">
               {number}
             </h5>
           </div>
-          <div className="w-[177px]">
+          <div className="w-[70%] sm:w-[177px]">
             <h4 className="font-inter font-bold text-[10px] text-[#016399]">
               Descripción
             </h4>

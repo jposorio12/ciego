@@ -6,6 +6,7 @@ import { PersistGate } from "redux-persist/integration/react";
 
 const App = () => {
   const { Router } = useRoutes();
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

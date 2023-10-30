@@ -1,10 +1,13 @@
 import arrow from "../../../../Assets/ArrowLeft.png";
 import close from "../../../../Assets/ClearWhite.png";
 import useComponentsControllers from "../../../../Controllers/ComponentsControllers";
+import { useNavigate } from "react-router-dom";
 
-const HeaderDetail = () => {
+const HeaderDetail = ({ steps, route }) => {
+  const { step, setStep } = steps;
   const { useHeaderDetail } = useComponentsControllers();
-  const { step, handleClickBack } = useHeaderDetail();
+  const { handleClickBack } = useHeaderDetail(step, setStep);
+  const navigate = useNavigate();
 
   return (
     <header className="bg-[#0C2047]">
@@ -22,7 +25,7 @@ const HeaderDetail = () => {
           src={close}
           alt="icon"
           className="h-[32px] w-[32px] cursor-pointer"
-          onClick={handleClickBack}
+          onClick={() => navigate(`${route}`)}
         />
       </div>
     </header>

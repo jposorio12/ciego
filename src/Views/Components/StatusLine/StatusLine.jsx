@@ -1,12 +1,9 @@
-import { StepSelector } from "../../../Redux/Slices/Steps";
-import { useSelector } from "react-redux";
 import useComponentsControllers from "../../../Controllers/ComponentsControllers";
 
-const StatusLine = () => {
+const StatusLine = ({ step }) => {
   const { useStatusLine } = useComponentsControllers();
   const { returnStylesSpan, returnStylesLine } = useStatusLine();
-  const { step, totalSteps } = useSelector(StepSelector);
-  const arraySteps = new Array(totalSteps).fill(0);
+  const arraySteps = new Array(3).fill(0);
 
   return (
     <div className="flex justify-center px-[16px] py-[8px] max-w-[400px] mt-[8px] mx-auto">

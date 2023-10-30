@@ -11,7 +11,7 @@ const CardSkuCount = ({ number, name, measure, index, onClick }) => {
         >
           SKU
         </h3>
-        <h4 className="font-inter font-bold text-[14px] text-[#202020] h-[60px] flex items-center">
+        <h4 className="font-inter font-bold text-[14px] text-[#202020] h-[60px] flex items-center break-all w-[70%]">
           {number}
         </h4>
       </div>

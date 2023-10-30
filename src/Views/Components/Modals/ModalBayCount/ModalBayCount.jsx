@@ -1,17 +1,17 @@
 import close from "../../../../Assets/Clear.png";
 import save from "../../../../Assets/saveEnabled.png";
-// import saveDisabled from "../../../../Assets/saveDisabled.png";
+import saveDisabled from "../../../../Assets/saveDisabled.png";
 import useComponents from "../..";
 import { useState } from "react";
 
-const ModalBayCount = ({ number, name, setOpenBayCount, formTwo }) => {
+const ModalBayCount = ({ number, name, setOpenBayCount, formTwo, setStep }) => {
   const { InputAddCount, ButtonDefault, SelectDefault } = useComponents();
-  const { handleSubmit, control, errors, isValid, setValue } = formTwo;
+  const { handleSubmit, control, errors, isValid, setValue, submitForm } =
+    formTwo;
 
   const [quantity, setQuantity] = useState(0);
   const [fault, setFault] = useState(0);
 
-  // console.log(isValid, handleSubmit);
   return (
     <div className="fixed top-0 bottom-0 left-0 right-0 bg-[#202020b3] backdrop-blur-sm z-[2]">
       <div
@@ -104,11 +104,18 @@ const ModalBayCount = ({ number, name, setOpenBayCount, formTwo }) => {
           </div>
           <ButtonDefault
             text="Guardar"
-            icon={save}
-            disabled={isValid}
-            classNameButton="flex items-center justify-center bg-[#19418E] rounded-[32px] w-[178px] h-[64px] gap-[16px] cursor-pointer"
-            classNameSpan="font-inter font-bold text-[18px] text-white"
-            onClick={handleSubmit}
+            icon={isValid ? save : saveDisabled}
+            disabled={!isValid}
+            classNameButton={`flex items-center justify-center ${
+              isValid ? "bg-[#19418E]" : "bg-[#E8E8E8]"
+            } rounded-[32px] w-[178px] h-[64px] gap-[16px] cursor-pointer`}
+            classNameSpan={`font-inter font-bold text-[18px] ${
+              isValid ? "text-white" : "text-[#A6A6A6]"
+            }`}
+            onClick={() => {
+              handleSubmit(submitForm)({ name, number });
+              setOpenBayCount(false);
+            }}
           />
         </div>
       </div>

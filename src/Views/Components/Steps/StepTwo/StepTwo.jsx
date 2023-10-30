@@ -3,7 +3,9 @@ import useComponents from "../..";
 import arrow from "../../../../Assets/ArrowRightWhite.png";
 import filter from "../../../../Assets/Filter.png";
 
-const StepTwo = () => {
+const StepTwo = ({ steps, submitForm }) => {
+  const { setStep } = steps;
+
   const {
     CardSkuCount,
     CardSkuSuccesful,
@@ -23,7 +25,6 @@ const StepTwo = () => {
     skus,
     bays,
     skusSelected,
-    handleConfirm,
     StepTwoForm,
   } = useStepTwo();
 
@@ -40,31 +41,33 @@ const StepTwo = () => {
         Agregar SKU al conteo
       </h2>
       <Filter icon={filter} />
-      {skusSelected?.map((el, i) => (
-        <div key={el} className="w-full max-w-[400px] mx-auto">
-          <h3
-            className={`font-inter font-bold text-[10px] text-[#016399] mb-[5px] mt-[12px] px-[16px] ${
-              i !== 0 && "hidden"
-            }`}
-          >
-            SKUs Agregados
-          </h3>
-          <CardSkuSuccesful
-            number="-B00060"
-            name="Modelo especial BT 6 Pack 24/355 ml R"
-            bay={1}
-            quantity={1}
-            fault="daño"
-            total={10}
-            measure={2}
-          />
-        </div>
-      ))}
+      {skusSelected?.map(
+        ({ name, number, measure, quantity, bay, faultOption, fault }, i) => (
+          <div key={number} className="w-full max-w-[400px] mx-auto">
+            <h3
+              className={`font-inter font-bold text-[10px] text-[#016399] mb-[5px] mt-[12px] px-[16px] ${
+                i !== 0 && "hidden"
+              }`}
+            >
+              SKUs Agregados
+            </h3>
+            <CardSkuSuccesful
+              number={number}
+              name={name}
+              bay={bay}
+              quantity={quantity}
+              fault={faultOption}
+              total={fault}
+              measure={measure}
+            />
+          </div>
+        )
+      )}
       {skus?.map((el, i) => (
         <CardSkuCount
           key={el}
           index={i}
-          number="-B00060"
+          number={Math.random()}
           name="Modelo especial BT 6 Pack 24/355 ml RD"
           measure="PCE"
           onClick={onclickAdd}
@@ -86,17 +89,25 @@ const StepTwo = () => {
           name={data?.name}
           setOpenBay={setOpenBay}
           setOpenBayCount={setOpenBayCount}
-          formTwo={{ handleSubmit, control, errors, isValid, setValue }}
+          setStep={setStep}
+          formTwo={{
+            handleSubmit,
+            control,
+            errors,
+            isValid,
+            setValue,
+            submitForm,
+          }}
         />
       )}
       {skusSelected?.length > 0 && (
         <ButtonDefault
           text="Confirmar consolidado"
           classNameButton={`rounded-[32px] h-[64px] w-[87%] max-w-[400px] mx-auto mt-[16px] cursor-pointer
-          flex items-center justify-center gap-[16px] bg-[#19418E] shadow-buttonCount fixed bottom-[40px] left-[50%] transform translate-x-[-50%]`}
+          flex items-center justify-center gap-[16px] bg-[#19418E] shadow-buttonCount sticky bottom-[40px]`}
           classNameSpan={`font-inter font-bold text-[18px] text-white`}
           icon={arrow}
-          onClick={handleConfirm}
+          onClick={() => setStep(3)}
         />
       )}
     </section>

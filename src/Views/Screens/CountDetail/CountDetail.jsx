@@ -1,14 +1,16 @@
 import useLayouts from "../../Layouts";
 import useComponents from "../../Components";
 import useScreenControllers from "../../../Controllers/ScreenControllers";
-
+import useWrappers from "../../../Wrappers";
 const CountDetail = () => {
   const { PrivateLayout } = useLayouts();
   const { HeaderDetail, StatusLine, StepOne, StepTwo, StepThree } =
     useComponents();
 
+  const { ScrollTop } = useWrappers();
+
   const { useCountDetail } = useScreenControllers();
-  const { CountDetailForm, step } = useCountDetail();
+  const { CountDetailForm, step, setStep, submitForm } = useCountDetail();
 
   const {
     handleSubmit,
@@ -17,15 +19,23 @@ const CountDetail = () => {
   } = CountDetailForm;
 
   return (
-    <PrivateLayout Header={<HeaderDetail />} className="bg-white">
-      <StatusLine />
-      {step === 1 && (
-        <StepOne form={{ handleSubmit, control, errors, isValid }} />
-      )}
-      {step === 2 && (
-        <StepTwo form={{ handleSubmit, control, errors, isValid }} />
-      )}
-      {step === 3 && <StepThree />}
+    <PrivateLayout
+      Header={<HeaderDetail steps={{ step, setStep }} route="/count" />}
+      className="bg-white"
+    >
+      <StatusLine step={step} />
+      <ScrollTop change={step}>
+        {step === 1 && (
+          <StepOne
+            form={{ handleSubmit, control, errors, isValid }}
+            steps={{ setStep }}
+          />
+        )}
+        {step === 2 && (
+          <StepTwo steps={{ step, setStep }} submitForm={submitForm} />
+        )}
+        {step === 3 && <StepThree steps={{ step, setStep }} />}
+      </ScrollTop>
     </PrivateLayout>
   );
 };

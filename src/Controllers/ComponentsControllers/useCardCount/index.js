@@ -1,6 +1,6 @@
 import cancel from "../../../Assets/cancelCircle.png";
-import clock from "../../../Assets/clock.png";
-import truckDisabled from "../../../Assets/truckDisabled.png";
+import clock from "../../../Assets/Clock.png";
+import truckDisabled from "../../../Assets/TruckDisabled.png";
 import truck from "../../../Assets/Truck.png";
 import CheckCircleBlack from "../../../Assets/CheckCircleBlack.png";
 
@@ -14,7 +14,7 @@ const useCardCount = () => {
       img: clock,
     },
     2: {
-      text: "Enviado",
+      text: "Cargado en SAP",
       style: "bg-white text-[#19418E]",
       styleSap: "bg-[#18DC5B] text-[#202020]",
       imgBottom: truck,
