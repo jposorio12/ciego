@@ -27,7 +27,7 @@ const Filter = ({
             onKeyDown={handleBlockIfNumber}
             placeholder="Buscar conteo..."
             onChange={handleChange}
-            onFocus={() => !activeOnFocus && navigate("/search")}
+            onFocus={() => activeOnFocus && navigate("/search")}
           />
         </div>
         <img

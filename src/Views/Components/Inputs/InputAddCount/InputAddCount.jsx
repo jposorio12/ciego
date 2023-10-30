@@ -1,8 +1,4 @@
-import { useState } from "react";
-
-const InputAddCount = ({ label }) => {
-  const [number, setNumber] = useState(0);
-
+const InputAddCount = ({ label, setValue, name, number, setNumber }) => {
   return (
     <div className="max-w-[400px] px-[16px]">
       {label}
@@ -15,8 +11,10 @@ const InputAddCount = ({ label }) => {
           onClick={() =>
             setNumber((prev) => {
               if (prev - 1 < 0) {
+                setValue && setValue(name, 0, { shouldValidate: true });
                 return 0;
               } else {
+                setValue && setValue(name, prev - 1, { shouldValidate: true });
                 return prev - 1;
               }
             })
@@ -27,7 +25,12 @@ const InputAddCount = ({ label }) => {
         <div className="font-inter font-bold text-[32px]">{number}</div>
         <div
           className="h-[40px] w-[40px] rounded-full bg-[#19418E] text-white flex items-center justify-center cursor-pointer"
-          onClick={() => setNumber((prev) => prev + 1)}
+          onClick={() => {
+            setNumber((prev) => {
+              setValue && setValue(name, prev + 1, { shouldValidate: true });
+              return prev + 1;
+            });
+          }}
         >
           <span>+</span>
         </div>

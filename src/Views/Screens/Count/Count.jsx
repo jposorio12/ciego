@@ -18,7 +18,7 @@ const Count = () => {
           <h2 className="font-inter font-bold text-[14px] mt-[8px] px-[16px] mx-auto max-w-[400px] text-[#0C2047]">
             LISTADO DE CONTEOS
           </h2>
-          <Filter icon={filter} />
+          <Filter icon={filter} activeOnFocus />
         </>
       )}
       <section

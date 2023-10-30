@@ -5,6 +5,7 @@ const SelectDefault = ({
   placeholder,
   options,
   classNameSelect,
+  classNameContainerSelect,
   name,
   control,
   errors,
@@ -15,23 +16,22 @@ const SelectDefault = ({
       name={name}
       control={control}
       render={({ field: { onChange, name, value } }) => (
-        <div className="max-w-[400px] w-full flex flex-col mt-[8px]">
+        <div
+          className={`flex flex-col w-full max-w-[400px] mt-[8px] ${classNameContainerSelect}`}
+        >
           {label}
           <select
-            onChange={({ target }) => {
-              onChange(target.value);
-            }}
+            onChange={({ target }) => onChange(target.value)}
             className={`${classNameSelect} cursor-pointer ${
               value
                 ? "!border-[#19418E] bg-[#D3EFFF33] border-[2px]"
                 : "!border-[#A6A6A6] bg-white"
             } ${errors[name]?.message && "!border-[1px] border-[#FF1130]"}`}
-            defaultValue={placeholder}
             value={value}
+            name={name}
           >
             <option
-              value={placeholder}
-              disabled
+              value=""
               className="font-inter font-normal text-[14px] text-[#797979] h-[40px]"
             >
               {placeholder}

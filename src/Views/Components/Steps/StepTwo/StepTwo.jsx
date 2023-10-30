@@ -1,6 +1,7 @@
 import useComponentsControllers from "../../../../Controllers/ComponentsControllers";
 import useComponents from "../..";
 import arrow from "../../../../Assets/ArrowRightWhite.png";
+import filter from "../../../../Assets/Filter.png";
 
 const StepTwo = () => {
   const {
@@ -9,23 +10,37 @@ const StepTwo = () => {
     ModalBay,
     ModalBayCount,
     ButtonDefault,
+    Filter,
   } = useComponents();
   const { useStepTwo } = useComponentsControllers();
   const {
     data,
-    bays,
     openBay,
     onclickAdd,
     setOpenBay,
     openBayCount,
     setOpenBayCount,
     skus,
+    bays,
+    skusSelected,
     handleConfirm,
+    StepTwoForm,
   } = useStepTwo();
+
+  const {
+    handleSubmit,
+    control,
+    setValue,
+    formState: { errors, isValid },
+  } = StepTwoForm;
 
   return (
     <section className="relative">
-      {skus?.map((el, i) => (
+      <h2 className="font-inter font-bold text-[20px] text-[#3D73DD] px-[16px] my-[16px] max-w-[400px] mx-auto">
+        Agregar SKU al conteo
+      </h2>
+      <Filter icon={filter} />
+      {skusSelected?.map((el, i) => (
         <div key={el} className="w-full max-w-[400px] mx-auto">
           <h3
             className={`font-inter font-bold text-[10px] text-[#016399] mb-[5px] mt-[12px] px-[16px] ${
@@ -45,7 +60,7 @@ const StepTwo = () => {
           />
         </div>
       ))}
-      {bays?.map((el, i) => (
+      {skus?.map((el, i) => (
         <CardSkuCount
           key={el}
           index={i}
@@ -62,19 +77,28 @@ const StepTwo = () => {
           bays={bays}
           setOpenBay={setOpenBay}
           setOpenBayCount={setOpenBayCount}
+          setValue={setValue}
         />
       )}
       {openBayCount && (
-        <ModalBayCount number={data?.number} name={data?.name} />
+        <ModalBayCount
+          number={data?.number}
+          name={data?.name}
+          setOpenBay={setOpenBay}
+          setOpenBayCount={setOpenBayCount}
+          formTwo={{ handleSubmit, control, errors, isValid, setValue }}
+        />
       )}
-      <ButtonDefault
-        text="Confirmar consolidado"
-        classNameButton={`rounded-[32px] h-[64px] w-[87%] max-w-[400px] mx-auto mt-[16px] cursor-pointer
+      {skusSelected?.length > 0 && (
+        <ButtonDefault
+          text="Confirmar consolidado"
+          classNameButton={`rounded-[32px] h-[64px] w-[87%] max-w-[400px] mx-auto mt-[16px] cursor-pointer
           flex items-center justify-center gap-[16px] bg-[#19418E] shadow-buttonCount fixed bottom-[40px] left-[50%] transform translate-x-[-50%]`}
-        classNameSpan={`font-inter font-bold text-[18px] text-white`}
-        icon={arrow}
-        onClick={handleConfirm}
-      />
+          classNameSpan={`font-inter font-bold text-[18px] text-white`}
+          icon={arrow}
+          onClick={handleConfirm}
+        />
+      )}
     </section>
   );
 };

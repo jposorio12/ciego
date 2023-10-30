@@ -1,9 +1,18 @@
+import { useState } from "react";
 import useComponents from "../..";
 import save from "../../../../Assets/saveDisabled.png";
 import close from "../../../../Assets/Clear.png";
 
-const ModalBay = ({ number, name, bays, setOpenBay }) => {
+const ModalBay = ({
+  number,
+  name,
+  bays,
+  setOpenBay,
+  setOpenBayCount,
+  setValue,
+}) => {
   const { ButtonDefault } = useComponents();
+  const [selected, setSelected] = useState("");
 
   return (
     <div className="fixed top-0 bottom-0 left-0 right-0 bg-[#202020b3] backdrop-blur-sm z-[2]">
@@ -33,10 +42,20 @@ const ModalBay = ({ number, name, bays, setOpenBay }) => {
           {bays?.map((bay) => (
             <div
               key={bay}
-              className="w-[148px] h-[55px] rounded-[16px] p-[8px] border-[2px] border-solid border-[#19418E] bg-[#EAF0FB]
-            flex items-center justify-center"
+              onClick={() => {
+                setSelected(bay);
+                setValue("bay", bay);
+              }}
+              className={`w-[148px] h-[55px] rounded-[16px] p-[8px] border-[2px] border-solid border-[#19418E] 
+              ${
+                selected === bay ? "bg-[#19418E]" : "bg-[#EAF0FB]"
+              } flex items-center justify-center`}
             >
-              <span className="font-inter font-bold text-[18px] text-[#19418E]">
+              <span
+                className={`font-inter font-bold text-[18px] ${
+                  selected === bay ? "text-white" : "text-[#19418E]"
+                }`}
+              >
                 {bay}
               </span>
             </div>
@@ -48,6 +67,10 @@ const ModalBay = ({ number, name, bays, setOpenBay }) => {
           classNameButton="w-[90%] max-w-[400px] bg-[#E8E8E8] h-[64px] rounded-[32px] flex mt-[42px] mb-[32px]
         items-center justify-center gap-[16px] mx-auto"
           classNameSpan="font-inter font-bold text-[18px] text-[#A6A6A6]"
+          onClick={() => {
+            setOpenBay(false);
+            setOpenBayCount(true);
+          }}
         />
       </div>
     </div>

@@ -39,7 +39,7 @@ const InputDefault = ({
         name={name}
         control={control}
         defaultValue={defaultValue ?? ""}
-        render={({ field: { onChange, name } }) => (
+        render={({ field: { onChange, name, value: valueForm } }) => (
           <div>
             <div
               className={`${classNameContainerInput} ${
@@ -55,11 +55,17 @@ const InputDefault = ({
                 type={
                   name === "password" ? (typeInput ? "password" : "text") : type
                 }
-                value={value}
-                onChange={({ target }) => {
-                  const value = target.value;
-                  onChange(value);
-                  updateValue && updateValue(value);
+                value={value ?? valueForm}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (type === "number" && Number(value) < 0) {
+                    e.target.value = 0;
+                    onChange(0);
+                    updateValue && updateValue(value);
+                  } else {
+                    onChange(value);
+                    updateValue && updateValue(value);
+                  }
                 }}
                 onKeyDown={handleBlockIfNumber}
                 name={name}
