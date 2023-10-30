@@ -23,9 +23,12 @@ const StepTwo = ({ steps, submitForm }) => {
     openBayCount,
     setOpenBayCount,
     skus,
+    handleChangeFilter,
     bays,
     skusSelected,
     StepTwoForm,
+    onClickEdit,
+    onClickDelete,
   } = useStepTwo();
 
   const {
@@ -40,7 +43,15 @@ const StepTwo = ({ steps, submitForm }) => {
       <h2 className="font-inter font-bold text-[20px] text-[#3D73DD] px-[16px] my-[16px] max-w-[400px] mx-auto">
         Agregar SKU al conteo
       </h2>
-      <Filter icon={filter} />
+
+      <Filter
+        icon={filter}
+        handleChange={handleChangeFilter}
+        placeholder="Buscar SKU..."
+        classNameContainer="!bg-[#E8E8E8]"
+        classNameInput="!bg-[#E8E8E8]"
+      />
+
       {skusSelected?.map(
         ({ name, number, measure, quantity, bay, faultOption, fault }, i) => (
           <div key={number} className="w-full max-w-[400px] mx-auto">
@@ -59,15 +70,17 @@ const StepTwo = ({ steps, submitForm }) => {
               fault={faultOption}
               total={fault}
               measure={measure}
+              onClickEdit={onClickEdit}
+              onClickDelete={onClickDelete}
             />
           </div>
         )
       )}
-      {skus?.map((el, i) => (
+      {skus?.map((sku, i) => (
         <CardSkuCount
-          key={el}
+          key={sku}
           index={i}
-          number={Math.random()}
+          number={sku}
           name="Modelo especial BT 6 Pack 24/355 ml RD"
           measure="PCE"
           onClick={onclickAdd}
@@ -87,9 +100,9 @@ const StepTwo = ({ steps, submitForm }) => {
         <ModalBayCount
           number={data?.number}
           name={data?.name}
+          edit={data?.edit}
           setOpenBay={setOpenBay}
           setOpenBayCount={setOpenBayCount}
-          setStep={setStep}
           formTwo={{
             handleSubmit,
             control,
@@ -100,6 +113,7 @@ const StepTwo = ({ steps, submitForm }) => {
           }}
         />
       )}
+      <div className="mb-[50px]" />
       {skusSelected?.length > 0 && (
         <ButtonDefault
           text="Confirmar consolidado"

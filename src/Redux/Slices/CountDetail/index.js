@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { create } from "./thunk";
 
 const initialState = {
   id: 1,
@@ -21,6 +22,16 @@ export const CountDetailSlice = createSlice({
         id: payload,
       };
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(create.fulfilled, (state, { payload }) => {
+      // payload.handleSucces();
+      return { ...state, email: "", password: "", data: payload.data };
+    });
+    builder.addCase(create.rejected, (state, { meta, payload }) => {
+      // meta.arg.handleError();
+      return { ...state, email: "", password: "" };
+    });
   },
 });
 

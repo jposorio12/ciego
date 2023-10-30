@@ -3,10 +3,10 @@ import confirm from "../../../../Assets/newCount.png";
 import edit from "../../../../Assets/Edit.png";
 import useComponentsControllers from "../../../../Controllers/ComponentsControllers";
 
-const StepThree = () => {
+const StepThree = ({ setStep }) => {
   const { CardCount, CardSkuSuccesful, ButtonDefault } = useComponents();
   const { useStepThree } = useComponentsControllers();
-  const { activeCount, form, skus } = useStepThree();
+  const { activeCount, form, skus, handleCreate } = useStepThree();
 
   return (
     <section>
@@ -49,15 +49,18 @@ const StepThree = () => {
         classNameSpan={`font-inter font-bold text-[18px] text-white`}
         classNameIcon="h-[28px] w-[28px]"
         icon={confirm}
+        onClick={handleCreate}
       />
+      <div className="mb-[140px]" />
       <ButtonDefault
         text="Editar"
         classNameButton={`rounded-[32px] h-[48px] w-[80%] max-w-[400px] mx-auto mt-[16px] cursor-pointer
           flex items-center justify-center gap-[16px] shado-buttonCount border-[2px] border-solid border-[#19418E]
-        fixed bottom-[70px] left-[50%] transform translate-x-[-50%] bg-white`}
+        sticky bottom-[70px] bg-white`}
         classNameSpan={`font-inter font-bold text-[18px] text-[#19418E]`}
         classNameIcon="h-[28px] w-[28px]"
         icon={edit}
+        onClick={() => setStep(1)}
       />
     </section>
   );

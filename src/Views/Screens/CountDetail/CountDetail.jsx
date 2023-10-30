@@ -34,7 +34,7 @@ const CountDetail = () => {
         {step === 2 && (
           <StepTwo steps={{ step, setStep }} submitForm={submitForm} />
         )}
-        {step === 3 && <StepThree steps={{ step, setStep }} />}
+        {step === 3 && <StepThree setStep={setStep} />}
       </ScrollTop>
     </PrivateLayout>
   );

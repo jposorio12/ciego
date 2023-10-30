@@ -11,6 +11,8 @@ const CardSkuSuccesful = ({
   total,
   measure,
   classNameContainer,
+  onClickEdit,
+  onClickDelete,
 }) => {
   return (
     <div
@@ -41,6 +43,7 @@ const CardSkuSuccesful = ({
               src={edit}
               alt="edit icon"
               className="h-[24px] w-[24px] cursor-pointer"
+              onClick={() => onClickEdit(name, number)}
             />
           </div>
         </div>
@@ -89,6 +92,7 @@ const CardSkuSuccesful = ({
             src={trash}
             alt="edit icon"
             className="h-[24px] w-[24px] cursor-pointer"
+            onClick={() => onClickDelete(number)}
           />
         </div>
       </div>

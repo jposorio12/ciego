@@ -4,7 +4,7 @@ import saveDisabled from "../../../../Assets/saveDisabled.png";
 import useComponents from "../..";
 import { useState } from "react";
 
-const ModalBayCount = ({ number, name, setOpenBayCount, formTwo, setStep }) => {
+const ModalBayCount = ({ number, name, edit, setOpenBayCount, formTwo }) => {
   const { InputAddCount, ButtonDefault, SelectDefault } = useComponents();
   const { handleSubmit, control, errors, isValid, setValue, submitForm } =
     formTwo;
@@ -113,7 +113,7 @@ const ModalBayCount = ({ number, name, setOpenBayCount, formTwo, setStep }) => {
               isValid ? "text-white" : "text-[#A6A6A6]"
             }`}
             onClick={() => {
-              handleSubmit(submitForm)({ name, number });
+              handleSubmit(submitForm)({ name, number, edit });
               setOpenBayCount(false);
             }}
           />

@@ -8,6 +8,8 @@ const Filter = ({
   activeOnFocus,
   onClickIcon,
   handleChange,
+  placeholder,
+  classNameInput
 }) => {
   const { useFilterCount } = useComponentsControllers();
   const { handleBlockIfNumber, navigate } = useFilterCount();
@@ -23,9 +25,10 @@ const Filter = ({
           <img src={lupe} alt="icon" className="h-[24px] w-[24px]" />
           <input
             type="number"
-            className="outline-none placeholder:font-inter placeholder:font-normal placeholder:text-[14px] placeholder:text-[#4D4D4D]"
+            className={`outline-none placeholder:font-inter placeholder:font-normal placeholder:text-[14px] placeholder:text-[#4D4D4D]
+            ${classNameInput}`}
             onKeyDown={handleBlockIfNumber}
-            placeholder="Buscar conteo..."
+            placeholder={placeholder ?? "Buscar conteo..."}
             onChange={handleChange}
             onFocus={() => activeOnFocus && navigate("/search")}
           />

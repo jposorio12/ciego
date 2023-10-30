@@ -58,6 +58,7 @@ const Count = () => {
             </h4>
           </div>
         )}
+        <div className="mb-[80px]" />
         <ButtonDefault
           text="Nuevo conteo"
           icon={newCount}

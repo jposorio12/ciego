@@ -50,12 +50,39 @@ const useCountDetail = () => {
     mode: "onChange",
   });
 
+  const editSku = (number, data) => {
+    const { bay, fault, faultOption, measure, quantity } = data;
+    const elementToEdit = counts?.filter((count) => count?.id === id)[0];
+    const filterSkus = elementToEdit?.skus?.filter(
+      (sku) => sku?.number !== number
+    );
+    const skuToEdit = elementToEdit?.skus?.filter(
+      (sku) => sku?.number === number
+    )[0];
+    const updateSku = {
+      ...skuToEdit,
+      bay,
+      fault,
+      faultOption,
+      measure,
+      quantity,
+    };
+    const skus = [...filterSkus, updateSku];
+    const finalElement = { ...elementToEdit, skus };
+    const filterCounts = counts?.filter((count) => count?.id !== id);
+    dispatch(updateForm([...filterCounts, finalElement]));
+  };
+
   const submitForm = (data, object) => {
     const { ccd, conveyor, driver, plaque, route, store, truckSheet } =
       CountDetailForm?.getValues();
 
     const { bay, fault, faultOption, measure, quantity } = data;
-    const { name, number } = object;
+    const { name, number, edit } = object;
+    if (edit) {
+      editSku(number, data);
+      return;
+    }
     const exist = counts?.find((count) => count?.id === id);
 
     if (exist) {
