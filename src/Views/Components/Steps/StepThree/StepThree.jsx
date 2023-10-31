@@ -1,12 +1,21 @@
 import useComponents from "../..";
 import confirm from "../../../../Assets/newCount.png";
 import edit from "../../../../Assets/Edit.png";
+import succes from "../../../../Assets/succesCreateCount.png";
+import error from "../../../../Assets/erroCreateCount.png";
 import useComponentsControllers from "../../../../Controllers/ComponentsControllers";
 
 const StepThree = ({ setStep }) => {
-  const { CardCount, CardSkuSuccesful, ButtonDefault } = useComponents();
+  const {
+    CardCount,
+    CardSkuSuccesful,
+    ButtonDefault,
+    ModalCreateSucces,
+    ModalCreateError,
+  } = useComponents();
   const { useStepThree } = useComponentsControllers();
-  const { activeCount, form, skus, handleCreate } = useStepThree();
+  const { activeCount, form, skus, handleCreate, openSucces, openError } =
+    useStepThree();
 
   return (
     <section>
@@ -41,17 +50,16 @@ const StepThree = ({ setStep }) => {
           />
         )
       )}
+      <div className="mb-[80px]" />
       <ButtonDefault
         text="Confirmar y crear"
         classNameButton={`rounded-[32px] h-[48px] w-[80%] max-w-[400px] mx-auto mt-[16px] cursor-pointer
-          flex items-center justify-center gap-[16px] bg-[#19418E] shadow-buttonCount fixed bottom-[140px] left-[50%]
-        transform translate-x-[-50%]`}
+          flex items-center justify-center gap-[16px] bg-[#19418E] shadow-buttonCount sticky bottom-[140px]`}
         classNameSpan={`font-inter font-bold text-[18px] text-white`}
         classNameIcon="h-[28px] w-[28px]"
         icon={confirm}
         onClick={handleCreate}
       />
-      <div className="mb-[140px]" />
       <ButtonDefault
         text="Editar"
         classNameButton={`rounded-[32px] h-[48px] w-[80%] max-w-[400px] mx-auto mt-[16px] cursor-pointer
@@ -62,6 +70,22 @@ const StepThree = ({ setStep }) => {
         icon={edit}
         onClick={() => setStep(1)}
       />
+      {openSucces && (
+        <ModalCreateSucces
+          icon={succes}
+          title="¡Tu conteo ha sido creado con éxito!"
+          text="Recuerda que podrás editarlo, siempre y cuándo éste continúe en estado "
+          route="/count"
+        />
+      )}
+      {openError && (
+        <ModalCreateError
+          icon={error}
+          title="Hemos tenido problemas para crear tu conteo."
+          text="Por favor inténtalo nuevamente."
+          setStep={setStep}
+        />
+      )}
     </section>
   );
 };

@@ -1,45 +1,53 @@
 import useComponentsControllers from "../../../../Controllers/ComponentsControllers";
 import useComponents from "../..";
-import arrow from "../../../../Assets/ArrowRightWhite.png";
+import arrow from "../../../../Assets/saveEnabled.png";
 import filter from "../../../../Assets/Filter.png";
+import succes from "../../../../Assets/succesCreateCount.png";
+import deleteIcon from "../../../../Assets/atentionDelete.png";
 
-const StepTwo = ({ steps, submitForm }) => {
+const StepTwoDetail = ({ steps, submitForm }) => {
   const { setStep } = steps;
 
   const {
-    CardSkuCount,
     CardSkuSuccesful,
     ModalBay,
     ModalBayCount,
     ModalSearch,
     ButtonDefault,
     Filter,
+    ModalCreateSucces,
+    ModalCreateError,
   } = useComponents();
-  const { useStepTwo } = useComponentsControllers();
+  const { useStepTwoDetail } = useComponentsControllers();
   const {
     data,
     openBay,
-    onclickAdd,
+    // onclickAdd,
     setOpenBay,
     openBayCount,
     setOpenBayCount,
-    skus,
+    // skus,
     handleChangeFilter,
     bays,
     skusSelected,
-    StepTwoForm,
+    StepTwoDetailForm,
     onClickEdit,
     onClickDelete,
     openModalSearch,
     setOpenModalSearch,
-  } = useStepTwo();
+    openSucces,
+    openDeleteSku,
+    setOpenSucces,
+    setOpenDeleteSku,
+    onClickRemoveSku,
+  } = useStepTwoDetail();
 
   const {
     handleSubmit,
     control,
     setValue,
     formState: { errors, isValid },
-  } = StepTwoForm;
+  } = StepTwoDetailForm;
 
   return (
     <section className="relative">
@@ -51,8 +59,8 @@ const StepTwo = ({ steps, submitForm }) => {
         icon={filter}
         handleChange={handleChangeFilter}
         placeholder="Buscar SKU..."
-        classNameContainer="!bg-[#E8E8E8]"
-        classNameInput="!bg-[#E8E8E8]"
+        classNameContainer="!bg-white"
+        classNameInput="!bg-white"
         activeOnFocus
         handleFocus={() => setOpenModalSearch(true)}
       />
@@ -85,16 +93,7 @@ const StepTwo = ({ steps, submitForm }) => {
           </div>
         )
       )}
-      {skus?.map((sku, i) => (
-        <CardSkuCount
-          key={sku}
-          index={i}
-          number={sku}
-          name="Modelo especial BT 6 Pack 24/355 ml RD"
-          measure="PCE"
-          onClick={onclickAdd}
-        />
-      ))}
+
       {openBay && (
         <ModalBay
           number={data?.number}
@@ -105,6 +104,7 @@ const StepTwo = ({ steps, submitForm }) => {
           setValue={setValue}
         />
       )}
+
       {openBayCount && (
         <ModalBayCount
           number={data?.number}
@@ -122,19 +122,47 @@ const StepTwo = ({ steps, submitForm }) => {
           }}
         />
       )}
-      <div className="mb-[50px]" />
-      {skusSelected?.length > 0 && (
-        <ButtonDefault
-          text="Confirmar consolidado"
-          classNameButton={`rounded-[32px] h-[64px] w-[87%] max-w-[400px] mx-auto mt-[16px] cursor-pointer
-          flex items-center justify-center gap-[16px] bg-[#19418E] shadow-buttonCount sticky bottom-[40px]`}
-          classNameSpan={`font-inter font-bold text-[18px] text-white`}
-          icon={arrow}
-          onClick={() => setStep(3)}
+
+      {openSucces && (
+        <ModalCreateSucces
+          icon={succes}
+          title="¡Tu conteo ha sido editado con éxito!"
+          text="Recuerda que podrás editarlo, siempre y cuándo éste continúe en estado"
+          onClick={() => setStep(0)}
         />
       )}
+
+      {openDeleteSku && (
+        <ModalCreateError
+          icon={deleteIcon}
+          title="¿Realmente quieres eliminar este SKU?"
+          text="Recuerda que no podrás volver a editarlo y se perderá para siempre."
+          sku
+          onClick={() => {
+            setOpenDeleteSku(false);
+            onClickRemoveSku();
+          }}
+          onclickArrow={() => setOpenDeleteSku(false)}
+        />
+      )}
+
+      <div className="mb-[50px]" />
+      <ButtonDefault
+        text="Guardar"
+        classNameButton={`rounded-[32px] h-[64px] w-[87%] max-w-[400px] mx-auto mt-[16px] cursor-pointer
+          flex items-center justify-center gap-[16px] bg-[#19418E] shadow-buttonCount sticky bottom-[80px]`}
+        classNameSpan={`font-inter font-bold text-[18px] text-white`}
+        icon={arrow}
+        onClick={() => setOpenSucces(true)}
+      />
+      <ButtonDefault
+        text="Agregar Sku"
+        classNameButton={`rounded-[32px] h-[64px] w-[87%] max-w-[400px] mx-auto mt-[16px] cursor-pointer
+          flex items-center justify-center gap-[16px] bg-white shadow-buttonCount sticky bottom-[40px] border-[2px] border-solid border-[#19418E]`}
+        classNameSpan={`font-inter font-bold text-[18px] text-[#19418E]`}
+      />
     </section>
   );
 };
 
-export default StepTwo;
+export default StepTwoDetail;

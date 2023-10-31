@@ -1,3 +1,6 @@
+import addWhite from "../../../../Assets/AddWhite.png";
+import removeWhite from "../../../../Assets/removeWhite.png";
+
 const InputAddCount = ({ label, setValue, name, number, setNumber }) => {
   return (
     <div className="max-w-[400px] px-[16px]">
@@ -7,7 +10,7 @@ const InputAddCount = ({ label, setValue, name, number, setNumber }) => {
         border-[#A6A6A6] h-[52px] mb-[16px] p-[4px]"
       >
         <div
-          className="h-[40px] w-[40px] rounded-full bg-[#E8E8E8] flex items-center justify-center cursor-pointer"
+          className="h-[40px] w-[40px] rounded-full bg-[#19418E] flex items-center justify-center cursor-pointer"
           onClick={() =>
             setNumber((prev) => {
               if (prev - 1 < 0) {
@@ -20,7 +23,7 @@ const InputAddCount = ({ label, setValue, name, number, setNumber }) => {
             })
           }
         >
-          <span>-</span>
+          <img src={removeWhite} alt="icon" className="w-[40px] h-[40px]" />
         </div>
         <div className="font-inter font-bold text-[32px]">{number}</div>
         <div
@@ -32,7 +35,7 @@ const InputAddCount = ({ label, setValue, name, number, setNumber }) => {
             });
           }}
         >
-          <span>+</span>
+          <img src={addWhite} alt="icon" className="w-[40px] h-[40px]" />
         </div>
       </div>
     </div>

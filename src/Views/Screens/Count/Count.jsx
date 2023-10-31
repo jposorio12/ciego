@@ -3,6 +3,7 @@ import useLayouts from "../../Layouts";
 import newCount from "../../../Assets/newCount.png";
 import filter from "../../../Assets/Filter.png";
 import empty from "../../../Assets/countEmpty.png";
+import add from "../../../Assets/AddWhite.png";
 import useScreenControllers from "../../../Controllers/ScreenControllers";
 
 const Count = () => {
@@ -22,7 +23,7 @@ const Count = () => {
         </>
       )}
       <section
-        className={`flex flex-col gap-[10px] ${
+        className={`flex flex-col gap-[20px] ${
           arrayCounts?.length > 0 ? "mt-[30px]" : "mt-[40px]"
         }`}
       >
@@ -61,7 +62,7 @@ const Count = () => {
         <div className="mb-[80px]" />
         <ButtonDefault
           text="Nuevo conteo"
-          icon={newCount}
+          icon={arrayCounts?.length > 0 ? newCount : add}
           classNameButton="rounded-[32px] bg-[#19418E] flex w-[80%] max-w-[400px] mx-auto h-[64px]
           shadow-buttonCount sticky bottom-[60px] flex items-center justify-center gap-[16px] cursor-pointer"
           classNameSpan="font-inter font-bold text-[18px] text-white"

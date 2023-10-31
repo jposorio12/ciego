@@ -1,8 +1,9 @@
 import clock from "../../../../Assets/Clock.png";
+import arrow from "../../../../Assets/arrowReasonCancel.png";
 import truck from "../../../../Assets/Truck.png";
 import useComponentsControllers from "../../../../Controllers/ComponentsControllers";
 
-const CardCount = ({
+const CardCountDetail = ({
   numberRoute,
   date,
   state,
@@ -12,17 +13,19 @@ const CardCount = ({
   plaque,
   driver,
   onClick,
+  reasonCancel,
 }) => {
-  const { useCardCount } = useComponentsControllers();
-  const { states } = useCardCount();
+  const { useCardCountDetail } = useComponentsControllers();
+  const { states, open, setOpen } = useCardCountDetail();
 
   const style = states?.[state];
 
   return (
     <div
       className={`${
-        style ? style?.style : "bg-white"
-      } rounded-[16px] max-w-[400px] mx-auto overflow-hidden cursor-pointer shadow-buttonCount`}
+        state === 3 ? style?.style : "bg-[#0C2047]"
+      } w-full rounded-b-[16px]
+       max-w-[400px] mx-auto overflow-hidden cursor-pointer shadow-buttonCount`}
       onClick={onClick}
     >
       <div className="flex mb-[8px] px-[16px] pt-[8px]">
@@ -30,25 +33,21 @@ const CardCount = ({
           <div>
             <h5
               className={`font-inter font-normal text-[10px] ${
-                style ? style?.style : "text-[#19418E]"
+                state === 3 ? style?.style : "text-white"
               }`}
             >
               Número de ruta
             </h5>
-            <h5
-              className={`font-inter font-bold text-[32px] ${
-                state === 3 ? "text-[#797979]" : "text-[#202020]"
-              }`}
-            >
+            <h5 className={`font-bold text-white font-inter text-[32px]`}>
               {numberRoute}
             </h5>
           </div>
           {date && (
             <div>
-              <h5 className="font-inter font-normal text-[10px] text-[#797979]">
+              <h5 className={`font-normal text-white font-inter text-[10px]`}>
                 Fecha de creación
               </h5>
-              <h5 className="font-inter font-normal text-[14px] text-[#4D4D4D]">
+              <h5 className={`font-normal text-white font-inter text-[14px]`}>
                 {date}
               </h5>
             </div>
@@ -59,7 +58,7 @@ const CardCount = ({
           <div className="mb-[8px]">
             <h5
               className={`font-inter font-normal text-[10px] ${
-                style ? style.style : "text-[#19418E]"
+                state === 3 ? style.style : "text-white"
               } mb-[8px]`}
             >
               Estado en SAP
@@ -86,10 +85,10 @@ const CardCount = ({
 
           {lastUpdate && (
             <div className="mt-[12px]">
-              <h5 className="font-inter font-normal text-[10px] text-[#797979]">
+              <h5 className={`font-normal text-white font-inter text-[10px]`}>
                 Última actualización
               </h5>
-              <h5 className="font-inter font-normal text-[14px] text-[#4D4D4D]">
+              <h5 className={`font-normal text-white font-inter text-[14px]`}>
                 {lastUpdate}
               </h5>
             </div>
@@ -99,7 +98,7 @@ const CardCount = ({
 
       <div
         className={`flex  ${
-          state === 3 ? "bg-[#c7c7c7]" : "bg-[#d3efff80]"
+          state === 3 ? "bg-[#4d4d4d33]" : "bg-[#19418E]"
         } px-[16px] py-[8px] gap-[18px]`}
       >
         <img
@@ -111,14 +110,14 @@ const CardCount = ({
           <div>
             <h5
               className={`font-inter font-normal text-[10px] ${
-                style ? style.bottom : "text-[#19418E]"
+                state === 3 ? style.bottom : "text-[#4EBFFE]"
               }`}
             >
               Transportador
             </h5>
             <p
               className={`font-inter font-bold text-[14px] ${
-                style ? style.bottom : "text-[#00314e]"
+                state === 3 ? style.bottom : "text-white"
               }`}
             >
               {numberDriver}
@@ -127,14 +126,14 @@ const CardCount = ({
           <div>
             <h5
               className={`font-inter font-normal text-[10px] ${
-                style ? style.bottom : "text-[#19418E]"
+                state === 3 ? style.bottom : "text-[#4EBFFE]"
               }`}
             >
               Ficha camión
             </h5>
             <p
               className={`font-inter font-bold text-[14px] ${
-                style ? style.bottom : "text-[#00314e]"
+                state === 3 ? style.bottom : "text-white"
               }`}
             >
               {truckSheet}
@@ -143,14 +142,14 @@ const CardCount = ({
           <div>
             <h5
               className={`font-inter font-normal text-[10px] ${
-                style ? style.bottom : "text-[#19418E]"
+                state === 3 ? style.bottom : "text-[#4EBFFE]"
               }`}
             >
               Placa
             </h5>
             <p
               className={`font-inter font-bold text-[14px] ${
-                style ? style.bottom : "text-[#00314e]"
+                state === 3 ? style.bottom : "text-white"
               }`}
             >
               {plaque}
@@ -160,14 +159,14 @@ const CardCount = ({
             <div>
               <h5
                 className={`font-inter font-normal text-[10px] ${
-                  style ? style.bottom : "text-[#19418E]"
+                  state === 3 ? style.bottom : "text-[#4EBFFE]"
                 }`}
               >
                 Conductor
               </h5>
               <p
                 className={`font-inter font-bold text-[14px] ${
-                  style ? style.bottom : "text-[#00314e]"
+                  state === 3 ? style.bottom : "text-white"
                 }`}
               >
                 {driver}
@@ -176,8 +175,38 @@ const CardCount = ({
           )}
         </div>
       </div>
+      {reasonCancel && (
+        <>
+          <div
+            className={`flex justify-between px-[16px] ${
+              open ? "pt-[8px]" : "py-[8px]"
+            } items-center bg-[#4D4D4D]`}
+          >
+            <h6 className="font-inter font-bold text-[14px]">
+              Motivo de cancelación
+            </h6>
+            <img
+              src={arrow}
+              alt="arrow"
+              className={`w-[32px] h-[32px] ${open && "rotate-90"}`}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setOpen((prev) => !prev);
+              }}
+            />
+          </div>
+          {open && (
+            <div className="px-[16px] pb-[16px] bg-[#4D4D4D]">
+              <h6 className="font-inter font-normal text-[10px]">
+                {reasonCancel}
+              </h6>
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
 };
 
-export default CardCount;
+export default CardCountDetail;

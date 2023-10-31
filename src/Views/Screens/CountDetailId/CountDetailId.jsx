@@ -11,41 +11,117 @@ const CountDetailId = () => {
     ButtonDefault,
     ModalDetailId,
     ModalCancelCount,
-    CardCount,
+    CardCountDetail,
+    StepOne,
+    StepTwoDetail,
+    StepThree,
+    StatusLine,
   } = useComponents();
   const { useCountDetailId } = useScreenControllers();
-  const { open, setOpen, openCancel, setOpenCancel, goBack } =
-    useCountDetailId();
+  const {
+    open,
+    setOpen,
+    openCancel,
+    setOpenCancel,
+    goBack,
+    form,
+    skus,
+    activeCount,
+    handleReasonCancel,
+    step,
+    setStep,
+    handleStep,
+    CountDetailIdForm,
+    id,
+    submitForm,
+  } = useCountDetailId();
+
+  const {
+    handleSubmit,
+    control,
+    formState: { errors, isValid },
+  } = CountDetailIdForm;
 
   return (
-    <PrivateLayout Header={<HeaderDetailId goBack={goBack} />}>
-      <CardCount
-        numberRoute={500774}
-        date="22/08/23"
-        state={3}
-        lastUpdate="22/08/23"
-        numberDriver="402-13091990"
-        truckSheet={2435}
-        plaque="L337500"
-        driver="El choquito"
-        isDetail
-      />
-      <h2 className="font-inter font-bold text-[14px] text-[#0C2047] max-w-[400px] px-[16px] my-[10px] mx-auto">
-        Transacciones / SKUs
-      </h2>
-      <CardSkuSuccesful classNameContainer="!bg-white" />
-      {open && (
-        <ModalDetailId setOpen={setOpen} setOpenCancel={setOpenCancel} />
+    <PrivateLayout
+      Header={
+        <HeaderDetailId goBack={goBack} stateCard={activeCount?.status} />
+      }
+    >
+      {step > 0 && <StatusLine step={step} quantitySteps={2} isDetail />}
+      {step === 0 && (
+        <>
+          <CardCountDetail
+            numberRoute={form?.route}
+            date={activeCount?.date}
+            state={activeCount?.status}
+            lastUpdate={activeCount?.lastUpdateDate}
+            numberDriver={form?.conveyor}
+            truckSheet={form?.truckSheet}
+            plaque={form?.plaque}
+            driver={form?.driver}
+            reasonCancel={activeCount?.reasonCancel}
+          />
+
+          <h2 className="font-inter font-bold text-[14px] text-[#0C2047] max-w-[400px] px-[16px] my-[10px] mx-auto">
+            Transacciones / SKUs
+          </h2>
+
+          {skus?.map((sku) => (
+            <CardSkuSuccesful
+              key={sku?.number}
+              classNameContainer={
+                activeCount?.status === 3 ? "!bg-[#E8E8E8]" : "!bg-white"
+              }
+              number={sku?.number}
+              name={sku?.name}
+              bay={sku?.bay}
+              quantity={sku?.quantity}
+              fault={sku?.fault}
+              total={sku?.total}
+              measure={sku?.measure}
+              state={activeCount?.status}
+            />
+          ))}
+
+          {open && (
+            <ModalDetailId
+              setOpen={setOpen}
+              setOpenCancel={setOpenCancel}
+              handleStep={handleStep}
+            />
+          )}
+
+          {openCancel && (
+            <ModalCancelCount
+              setOpen={setOpen}
+              setOpenCancel={setOpenCancel}
+              handleReasonCancel={handleReasonCancel}
+            />
+          )}
+
+          {activeCount?.status !== 3 && (
+            <ButtonDefault
+              icon={add}
+              classNameIcon="h-[32px] w-[32px]"
+              classNameButton="rounded-full bg-[#19418E] fixed bottom-[30px] right-[24px] h-[64px] w-[64px] flex justify-center items-center cursor-pointer"
+              onClick={() => setOpen(true)}
+            />
+          )}
+        </>
       )}
-      {openCancel && (
-        <ModalCancelCount setOpen={setOpen} setOpenCancel={setOpenCancel} />
+      {step === 1 && (
+        <StepOne
+          form={{ handleSubmit, control, errors, isValid }}
+          steps={{ setStep }}
+          isDetail
+          id={id}
+        />
       )}
-      <ButtonDefault
-        icon={add}
-        classNameIcon="h-[32px] w-[32px]"
-        classNameButton="rounded-full bg-[#19418E] fixed bottom-[30px] right-[24px] h-[64px] w-[64px] flex justify-center items-center cursor-pointer"
-        onClick={() => setOpen(true)}
-      />
+      {step === 2 && (
+        <StepTwoDetail steps={{ setStep }} submitForm={submitForm} />
+      )}
+      {step === 3 && <StepThree setStep={setStep} />}
     </PrivateLayout>
   );
 };

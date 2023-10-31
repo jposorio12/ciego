@@ -48,14 +48,16 @@ const InputDefault = ({
               } ${
                 (value || valueForm) &&
                 inputCreate &&
-                "!border-[#19418E] bg-[#D3EFFF33] border-[2px]"
+                "!border-[#19418E] !bg-[#D3EFFF33] border-[2px]"
               }`}
             >
               {icon && (
                 <img className="h-[24px] w-[24px]" src={icon} alt="icon" />
               )}
               <input
-                className={classNameInput}
+                className={`${classNameInput} ${
+                  (value || valueForm) && inputCreate && "!bg-[#D3EFFF33]"
+                }`}
                 placeholder={placeholder}
                 type={
                   name === "password" ? (typeInput ? "password" : "text") : type

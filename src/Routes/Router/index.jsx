@@ -10,8 +10,7 @@ import useWrappers from "../../Wrappers";
 
 const Router = () => {
   const { useScreens } = useViews();
-  const { Login, Offline, Count, Search, CountDetail, CountDetailId } =
-    useScreens();
+  const { Login, Offline, Count, CountDetail, CountDetailId } = useScreens();
   const { ScrollTop } = useWrappers();
 
   return (
@@ -22,7 +21,6 @@ const Router = () => {
           <Route path="/offline" element={<Offline />} />
           {/* <Route path="/count" element={<PrivateRoute />}> */}
           <Route path="/count" element={<Count />} />
-          <Route path="/search" element={<Search />} />
           <Route path="/detail" element={<CountDetail />} />
           <Route path="/detail/:id" element={<CountDetailId />} />
           {/* </Route> */}

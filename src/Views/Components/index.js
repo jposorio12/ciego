@@ -12,10 +12,18 @@ const useComponents = () => {
   const { InputDefault, SelectDefault, InputAddCount } = useInputs();
   const { ButtonDefault } = useButtons();
   const { HeaderCount, HeaderDetail, HeaderDetailId } = useHeaders();
-  const { CardCount, CardSkuCount, CardSkuSuccesful } = useCards();
-  const { StepOne, StepTwo, StepThree } = useSteps();
-  const { ModalBay, ModalBayCount, ModalDetailId, ModalCancelCount } =
-    useModals();
+  const { CardCount, CardCountDetail, CardSkuCount, CardSkuSuccesful } =
+    useCards();
+  const { StepOne, StepTwo, StepTwoDetail, StepThree } = useSteps();
+  const {
+    ModalBay,
+    ModalBayCount,
+    ModalDetailId,
+    ModalCancelCount,
+    ModalCreateSucces,
+    ModalCreateError,
+    ModalSearch,
+  } = useModals();
 
   return {
     InputDefault,
@@ -26,6 +34,7 @@ const useComponents = () => {
     HeaderDetail,
     HeaderDetailId,
     CardCount,
+    CardCountDetail,
     CardSkuCount,
     CardSkuSuccesful,
     WifiIcon,
@@ -33,11 +42,15 @@ const useComponents = () => {
     StatusLine,
     StepOne,
     StepTwo,
+    StepTwoDetail,
     StepThree,
     ModalBay,
     ModalBayCount,
     ModalDetailId,
     ModalCancelCount,
+    ModalCreateSucces,
+    ModalCreateError,
+    ModalSearch,
   };
 };
 

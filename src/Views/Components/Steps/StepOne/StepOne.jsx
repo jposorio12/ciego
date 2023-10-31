@@ -3,17 +3,23 @@ import arrow from "../../../../Assets/ArrowRightDisable.png";
 import arrowEnabled from "../../../../Assets/ArrowRightWhite.png";
 import useComponentsControllers from "../../../../Controllers/ComponentsControllers";
 
-const StepOne = ({ form, steps }) => {
+const StepOne = ({ form, steps, isDetail, id }) => {
   const { handleSubmit, control, errors, isValid } = form;
   const { setStep } = steps;
   const { SelectDefault, InputDefault, ButtonDefault } = useComponents();
   const { useStepOne } = useComponentsControllers();
-  const { submitForm, date } = useStepOne(setStep);
+  const { submitForm, submitFormDetail, date } = useStepOne(setStep);
 
   return (
     <form
       className="max-w-[400px] mx-auto px-[16px]"
-      onSubmit={handleSubmit(submitForm)}
+      onSubmit={() => {
+        if (isDetail) {
+          handleSubmit(submitFormDetail)(id);
+        } else {
+          handleSubmit(submitForm)();
+        }
+      }}
     >
       <h2 className="font-inter font-bold text-[20px] text-[#3D73DD] mt-[10px]">
         Ingreso de datos conteo
@@ -79,7 +85,7 @@ const StepOne = ({ form, steps }) => {
         }
         classNameContainer="mt-[8px] w-full"
         classNameContainerInput="p-[8px] border-[1px] border-solid border-[#A6A6A6] rounded-[4px] mt-[4px]"
-        classNameInput="w-full outline-none placeholder:text-black"
+        classNameInput="w-full outline-none placeholder:text-black bg-transparent"
         placeholder="Ingresa el número del transportador"
         inputCreate
         errors={errors}
@@ -110,7 +116,7 @@ const StepOne = ({ form, steps }) => {
         }
         classNameContainer="mt-[8px] w-full"
         classNameContainerInput="p-[8px] border-[1px] border-solid border-[#A6A6A6] rounded-[4px] mt-[4px]"
-        classNameInput="w-full outline-none placeholder:text-black"
+        classNameInput="w-full outline-none placeholder:text-black bg-transparent"
         placeholder="Ingresa el número del transportador"
         errors={errors}
         inputCreate
@@ -127,7 +133,7 @@ const StepOne = ({ form, steps }) => {
         }
         classNameContainer="mt-[8px] w-full"
         classNameContainerInput="p-[8px] border-[1px] border-solid border-[#A6A6A6] rounded-[4px] mt-[4px]"
-        classNameInput="w-full outline-none placeholder:text-black"
+        classNameInput="w-full outline-none placeholder:text-black bg-transparent"
         placeholder="Ingresa el número del transportador"
         errors={errors}
         inputCreate

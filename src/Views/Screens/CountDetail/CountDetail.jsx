@@ -2,6 +2,7 @@ import useLayouts from "../../Layouts";
 import useComponents from "../../Components";
 import useScreenControllers from "../../../Controllers/ScreenControllers";
 import useWrappers from "../../../Wrappers";
+
 const CountDetail = () => {
   const { PrivateLayout } = useLayouts();
   const { HeaderDetail, StatusLine, StepOne, StepTwo, StepThree } =

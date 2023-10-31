@@ -25,8 +25,22 @@ const useStepOne = (setStep) => {
     }
   };
 
+  const submitFormDetail = (data, id) => {
+    const activeCount = counts?.filter((count) => count?.id === Number(id))[0];
+    const thereAreSkus = activeCount?.skus?.length > 0;
+
+    if (thereAreSkus) {
+      const updateData = counts?.filter((count) => count?.id !== Number(id));
+      const newData = [...updateData, { ...activeCount, form: { ...data } }];
+      dispatch(updateForm(newData));
+      setStep((prev) => prev + 1);
+    } else {
+      setStep((prev) => prev + 1);
+    }
+  };
+
   const date = getDate();
 
-  return { submitForm, date };
+  return { submitForm, date, submitFormDetail };
 };
 export default useStepOne;

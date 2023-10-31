@@ -1,9 +1,9 @@
 import close from "../../../../Assets/Clear.png";
 import pencil from "../../../../Assets/pencil.png";
 import deleteIcon from "../../../../Assets/DeleteClipboard.png";
-import add from "../../../../Assets/AddCircleBlue.png";
+// import add from "../../../../Assets/AddCircleBlue.png";
 
-const ModalDetailId = ({ setOpen, setOpenCancel }) => {
+const ModalDetailId = ({ setOpen, setOpenCancel, handleStep }) => {
   return (
     <div className="fixed top-0 bottom-0 left-0 right-0 bg-[#202020b3] backdrop-blur-sm z-[2]">
       <div
@@ -22,18 +22,21 @@ const ModalDetailId = ({ setOpen, setOpenCancel }) => {
           />
         </div>
         <div className="flex flex-col gap-[8px]">
-          <div className="flex items-center gap-[24px] cursor-pointer">
+          <div
+            className="flex items-center gap-[24px] cursor-pointer"
+            onClick={handleStep}
+          >
             <img src={pencil} alt="icon" className="w-[32px] h-[32px]" />
             <h4 className="font-inter font-bold text-[18px] text-[#19418E]">
               Editar Conteo
             </h4>
           </div>
-          <div className="flex items-center gap-[24px] cursor-pointer">
-            <img src={add} alt="icon" className="h-[32px] w-[32px]" />
-            <h4 className="font-inter font-bold text-[18px] text-[#19418E]">
-              Agregar SKU
-            </h4>
-          </div>
+          {/* <div className="flex items-center gap-[24px] cursor-pointer"> */}
+          {/*   <img src={add} alt="icon" className="h-[32px] w-[32px]" /> */}
+          {/*   <h4 className="font-inter font-bold text-[18px] text-[#19418E]"> */}
+          {/*     Agregar SKU */}
+          {/*   </h4> */}
+          {/* </div> */}
           <div
             className="flex items-center gap-[24px] cursor-pointer"
             onClick={() => {

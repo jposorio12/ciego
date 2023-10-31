@@ -26,11 +26,11 @@ export const CountDetailSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(create.fulfilled, (state, { payload }) => {
       // payload.handleSucces();
-      return { ...state, email: "", password: "", data: payload.data };
+      return { ...state };
     });
     builder.addCase(create.rejected, (state, { meta, payload }) => {
       // meta.arg.handleError();
-      return { ...state, email: "", password: "" };
+      return { ...state };
     });
   },
 });

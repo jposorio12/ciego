@@ -1,9 +1,12 @@
+import { useState } from "react";
 import clear from "../../../../Assets/clearBlack.png";
 import atention from "../../../../Assets/atentionCancel.png";
 import useComponents from "../..";
 
-const ModalCancelCount = ({ setOpen, setOpenCancel }) => {
+const ModalCancelCount = ({ setOpen, setOpenCancel, handleReasonCancel }) => {
   const { ButtonDefault } = useComponents();
+  const [value, setValue] = useState("");
+
   const handleClose = () => {
     setOpen(false);
     setOpenCancel(false);
@@ -53,14 +56,25 @@ const ModalCancelCount = ({ setOpen, setOpenCancel }) => {
               placeholder="Ingresa el motivo de la cancelación"
               className="w-full h-[64px] border-[1px] border-solid border-[#A6A6A6] px-[8px] py-[10px] outline-none
               placeholder:text-[#797979] placeholder:text-[14px] placeholder:font-inter"
+              onChange={({ target }) => {
+                if (target.value?.length <= 200) {
+                  setValue(target.value);
+                }
+              }}
+              value={value}
             />
             <p className="font-inter font-normal text-[12px] text-[#63687A] mb-[24px]">
               Max. 200 caracteres
             </p>
             <ButtonDefault
               text="Cancelar conteo"
+              disabled={value?.length > 0 ? false : true}
               classNameButton="rounded-[32px] h-[54px] bg-[#FF1130] shadow-buttonCount w-full max-w-[400px] mx-auto flex items-center justify-center cursor-pointer"
               classNameSpan="text-white font-inter font-bold text-[18px]"
+              onClick={() => {
+                handleReasonCancel(value);
+                handleClose();
+              }}
             />
             <ButtonDefault
               text="Salir sin cancelar"

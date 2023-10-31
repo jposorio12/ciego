@@ -9,10 +9,11 @@ const Filter = ({
   onClickIcon,
   handleChange,
   placeholder,
-  classNameInput
+  classNameInput,
+  handleFocus,
 }) => {
   const { useFilterCount } = useComponentsControllers();
-  const { handleBlockIfNumber, navigate } = useFilterCount();
+  const { handleBlockIfNumber } = useFilterCount();
 
   return (
     <section
@@ -30,7 +31,7 @@ const Filter = ({
             onKeyDown={handleBlockIfNumber}
             placeholder={placeholder ?? "Buscar conteo..."}
             onChange={handleChange}
-            onFocus={() => activeOnFocus && navigate("/search")}
+            onFocus={() => activeOnFocus && handleFocus()}
           />
         </div>
         <img

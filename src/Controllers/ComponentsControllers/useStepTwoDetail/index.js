@@ -5,17 +5,22 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { CountDetailSelector } from "../../../Redux/Slices/CountDetail";
 import { updateForm } from "../../../Redux/Slices/CountDetail";
+import { useParams } from "react-router-dom";
 
-const useStepTwo = () => {
+const useStepTwoDetail = () => {
   const [data, setData] = useState({});
   const [openBay, setOpenBay] = useState(false);
   const [openModalSearch, setOpenModalSearch] = useState(false);
+  const [openSucces, setOpenSucces] = useState(false);
+  const [numberDelete, setNumberDelete] = useState();
+  const [openDeleteSku, setOpenDeleteSku] = useState(false);
   const [skus, setSkus] = useState(["12", "11", "10", "9"]);
   const [openBayCount, setOpenBayCount] = useState(false);
-  const { id, counts } = useSelector(CountDetailSelector);
+  const { counts } = useSelector(CountDetailSelector);
+  const { id } = useParams();
   const dispatch = useDispatch();
 
-  const StepTwoSchema = yup.object({
+  const StepTwoDetailSchema = yup.object({
     bay: yup.string().required("Debes seleccionar una bahía"),
     quantity: yup.number().positive().required(),
     fault: yup.number().positive(),
@@ -27,13 +32,13 @@ const useStepTwo = () => {
     measure: yup.string().required(),
   });
 
-  const StepTwoForm = useForm({
-    resolver: yupResolver(StepTwoSchema),
+  const StepTwoDetailForm = useForm({
+    resolver: yupResolver(StepTwoDetailSchema),
     mode: "onChange",
   });
 
   const resetData = () => {
-    const reset = StepTwoForm.resetField;
+    const reset = StepTwoDetailForm.resetField;
     reset("quantity");
     reset("faultOption");
     reset("fault");
@@ -47,7 +52,7 @@ const useStepTwo = () => {
   };
 
   const bays = ["B1", "B2", "B3", "B4", "B5", "B6"];
-  const countActive = counts?.filter((count) => count?.id === id);
+  const countActive = counts?.filter((count) => count?.id === Number(id));
   const skusSelected = countActive[0]?.skus;
 
   const onClickEdit = (name, number) => {
@@ -56,15 +61,20 @@ const useStepTwo = () => {
     resetData();
   };
 
-  const onClickDelete = (number) => {
+  const onClickRemoveSku = () => {
     resetData();
-    const elements = counts?.filter((count) => count?.id !== id);
+    const elements = counts?.filter((count) => count?.id !== Number(id));
     const deleteSku = countActive?.[0]?.skus?.filter(
-      (sku) => sku?.number !== number
+      (sku) => sku?.number !== numberDelete
     );
     const newElement = { ...countActive[0], skus: deleteSku };
 
     dispatch(updateForm([...elements, newElement]));
+  };
+
+  const onClickDelete = (number) => {
+    setNumberDelete(number);
+    setOpenDeleteSku(true);
   };
 
   const handleChangeFilter = ({ target }) => {
@@ -89,12 +99,17 @@ const useStepTwo = () => {
     handleChangeFilter,
     bays,
     skusSelected,
-    StepTwoForm,
+    StepTwoDetailForm,
     onClickEdit,
     onClickDelete,
     openModalSearch,
     setOpenModalSearch,
+    openSucces,
+    openDeleteSku,
+    setOpenSucces,
+    onClickRemoveSku,
+    setOpenDeleteSku,
   };
 };
 
-export default useStepTwo;
+export default useStepTwoDetail;

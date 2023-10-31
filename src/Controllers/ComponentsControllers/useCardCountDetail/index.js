@@ -1,15 +1,15 @@
 import cancel from "../../../Assets/cancelCircle.png";
 import clock from "../../../Assets/Clock.png";
-import arrow from "../../../Assets/arrowWhiteUp.png";
-import truckDisabled from "../../../Assets/TruckDisabled.png";
-import truck from "../../../Assets/Truck.png";
+import truckDisabled from "../../../Assets/TruckWhite.png";
+import truck from "../../../Assets/TruckCeleste.png";
 import CheckCircleBlack from "../../../Assets/CheckCircleBlack.png";
+import { useState } from "react";
 
-const useCardCount = () => {
+const useCardCountDetail = () => {
   const states = {
     1: {
       text: "En progreso",
-      style: "bg-white text-[#19418E]",
+      style: "bg-[#0C2047] text-white",
       styleSap: "bg-[#FFC610] text-[#202020]",
       imgBottom: truck,
       img: clock,
@@ -23,21 +23,17 @@ const useCardCount = () => {
     },
     3: {
       text: "Cancelado",
-      style: "bg-[#e8e8e8] text-[#797979]",
+      style: "bg-[#797979] text-white",
       styleSap: "bg-[#FF1130] text-white",
-      bottom: "bg-[#c7c7c7] text-[#797979]",
+      bottom: "text-white",
       imgBottom: truckDisabled,
       img: cancel,
     },
-    4: {
-      text: "Enviado",
-      style: "bg-white text-[#19418E]",
-      styleSap: "bg-[#016399] text-white",
-      imgBottom: truck,
-      img: arrow,
-    },
   };
-  return { states };
+
+  const [open, setOpen] = useState(false);
+
+  return { states, open, setOpen };
 };
 
-export default useCardCount;
+export default useCardCountDetail;
