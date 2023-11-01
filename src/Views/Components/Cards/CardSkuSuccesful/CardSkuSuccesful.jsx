@@ -3,7 +3,7 @@ import check from "../../../../Assets/CheckCircle.png";
 import clear from "../../../../Assets/ClearCircleRed.png";
 import trash from "../../../../Assets/trash.png";
 import trashGray from "../../../../Assets/trashGray.png";
-import editGray from "../../../../Assets/editGray.png";
+import editGray from "../../../../Assets/EditGray.png";
 
 const CardSkuSuccesful = ({
   number,

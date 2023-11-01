@@ -7,6 +7,7 @@ import Filter from "./Filter";
 import StatusLine from "./StatusLine";
 import useSteps from "./Steps";
 import useModals from "./Modals";
+import SuggestLine from "./SuggestLine";
 
 const useComponents = () => {
   const { InputDefault, SelectDefault, InputAddCount } = useInputs();
@@ -51,6 +52,7 @@ const useComponents = () => {
     ModalCreateSucces,
     ModalCreateError,
     ModalSearch,
+    SuggestLine
   };
 };
 

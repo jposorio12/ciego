@@ -1,4 +1,5 @@
 import lupe from "../../../Assets/lupa.png";
+import errorIcon from "../../../Assets/atentionFilter.png";
 import useComponentsControllers from "../../../Controllers/ComponentsControllers";
 
 const Filter = ({
@@ -11,6 +12,8 @@ const Filter = ({
   placeholder,
   classNameInput,
   handleFocus,
+  error,
+  value
 }) => {
   const { useFilterCount } = useComponentsControllers();
   const { handleBlockIfNumber } = useFilterCount();
@@ -26,13 +29,21 @@ const Filter = ({
           <img src={lupe} alt="icon" className="h-[24px] w-[24px]" />
           <input
             type="number"
-            className={`outline-none placeholder:font-inter placeholder:font-normal placeholder:text-[14px] placeholder:text-[#4D4D4D]
+            value={value}
+            className={`outline-none placeholder:font-inter placeholder:font-normal placeholder:text-[14px] placeholder:text-[#4D4D4D] grow
             ${classNameInput}`}
             onKeyDown={handleBlockIfNumber}
             placeholder={placeholder ?? "Buscar conteo..."}
             onChange={handleChange}
             onFocus={() => activeOnFocus && handleFocus()}
           />
+          {error && (
+            <img
+              src={errorIcon}
+              alt="icon"
+              className="h-[24px] w-[24px] mt-[-2px]"
+            />
+          )}
         </div>
         <img
           src={icon}

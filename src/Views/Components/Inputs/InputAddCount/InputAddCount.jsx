@@ -1,5 +1,5 @@
 import addWhite from "../../../../Assets/AddWhite.png";
-import removeWhite from "../../../../Assets/removeWhite.png";
+import removeWhite from "../../../../Assets/RemoveWhite.png";
 
 const InputAddCount = ({ label, setValue, name, number, setNumber }) => {
   return (

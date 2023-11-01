@@ -7,10 +7,21 @@ import add from "../../../Assets/AddWhite.png";
 import useScreenControllers from "../../../Controllers/ScreenControllers";
 
 const Count = () => {
-  const { HeaderCount, Filter, CardCount, ButtonDefault } = useComponents();
+  const { HeaderCount, Filter, CardCount, ButtonDefault, ModalSearch } =
+    useComponents();
   const { PrivateLayout } = useLayouts();
   const { useCount } = useScreenControllers();
-  const { navigate, arrayCounts, onClick } = useCount();
+  const {
+    navigate,
+    arrayCounts,
+    onClick,
+    handleChange,
+    openModalSearch,
+    setOpenModalSearch,
+    match,
+    handleUpdateSuggestions,
+    filterCounts,
+  } = useCount();
 
   return (
     <PrivateLayout Header={<HeaderCount />}>
@@ -19,9 +30,25 @@ const Count = () => {
           <h2 className="font-inter font-bold text-[14px] mt-[8px] px-[16px] mx-auto max-w-[400px] text-[#0C2047]">
             LISTADO DE CONTEOS
           </h2>
-          <Filter icon={filter} activeOnFocus />
+          <Filter
+            icon={filter}
+            activeOnFocus
+            handleFocus={() => setOpenModalSearch(true)}
+          />
         </>
       )}
+
+      {openModalSearch && (
+        <ModalSearch
+          setOpenModalSearch={setOpenModalSearch}
+          handleChange={handleChange}
+          array={match}
+          type={1}
+          handleUpdateSuggestions={handleUpdateSuggestions}
+          suggestions={filterCounts}
+        />
+      )}
+
       <section
         className={`flex flex-col gap-[20px] ${
           arrayCounts?.length > 0 ? "mt-[30px]" : "mt-[40px]"
