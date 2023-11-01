@@ -12,8 +12,8 @@ const appReducers = combineReducers({
 });
 
 export const rootReducers = (state, action) => {
-  if (action.type === "logOut") {
-    const newState = {};
+  if (action.type === "Login/logOut") {
+    const newState = { ...state, Login: {} };
     return appReducers(newState, action);
   }
   return appReducers(state, action);

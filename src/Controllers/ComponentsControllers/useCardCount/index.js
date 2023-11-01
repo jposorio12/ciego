@@ -30,7 +30,7 @@ const useCardCount = () => {
       img: cancel,
     },
     4: {
-      text: "Enviado",
+      text: "Por enviar",
       style: "bg-white text-[#19418E]",
       styleSap: "bg-[#016399] text-white",
       imgBottom: truck,

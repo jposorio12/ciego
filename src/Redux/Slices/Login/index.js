@@ -16,6 +16,7 @@ export const LoginSlice = createSlice({
     updateEmail(state, { payload }) {
       return { ...state, email: payload };
     },
+    logOut() {},
   },
   extraReducers: (builder) => {
     builder.addCase(Validate.fulfilled, (state, { payload }) => {
@@ -29,7 +30,7 @@ export const LoginSlice = createSlice({
   },
 });
 
-export const { updatePassword, updateEmail } = LoginSlice.actions;
+export const { updatePassword, updateEmail, logOut } = LoginSlice.actions;
 
 export const LoginSelector = (store) => store.Login;
 

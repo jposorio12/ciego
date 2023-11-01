@@ -12,7 +12,7 @@ import useUtils from "../../../Utils";
 const useCountDetail = () => {
   const dispatch = useDispatch();
   const { id, counts } = useSelector(CountDetailSelector);
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(1);
   const { FormatDate } = useUtils();
   const { dateInline } = FormatDate();
 

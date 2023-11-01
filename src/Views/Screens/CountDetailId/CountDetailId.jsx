@@ -34,6 +34,8 @@ const CountDetailId = () => {
     CountDetailIdForm,
     id,
     submitForm,
+    onClickEdit,
+    onClickDelete,
   } = useCountDetailId();
 
   const {
@@ -81,6 +83,8 @@ const CountDetailId = () => {
               total={sku?.total}
               measure={sku?.measure}
               state={activeCount?.status}
+              onClickEdit={() => onClickEdit(activeCount?.status)}
+              onClickDelete={() => onClickDelete(activeCount?.status)}
             />
           ))}
 
@@ -89,6 +93,7 @@ const CountDetailId = () => {
               setOpen={setOpen}
               setOpenCancel={setOpenCancel}
               handleStep={handleStep}
+              state={activeCount?.status}
             />
           )}
 
@@ -100,7 +105,7 @@ const CountDetailId = () => {
             />
           )}
 
-          {activeCount?.status !== 3 && (
+          {activeCount?.status !== 2 && activeCount?.status !== 3 && (
             <ButtonDefault
               icon={add}
               classNameIcon="h-[32px] w-[32px]"

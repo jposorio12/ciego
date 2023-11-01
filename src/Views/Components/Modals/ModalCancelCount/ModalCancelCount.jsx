@@ -14,7 +14,7 @@ const ModalCancelCount = ({ setOpen, setOpenCancel, handleReasonCancel }) => {
 
   return (
     <div className="fixed top-0 bottom-0 left-0 right-0 bg-[#202020b3] backdrop-blur-sm z-[2]">
-      <div className="relative w-full h-full bg-white">
+      <div className="relative w-full h-full bg-white overflow-auto">
         <img
           src={clear}
           alt="icon"
@@ -69,8 +69,12 @@ const ModalCancelCount = ({ setOpen, setOpenCancel, handleReasonCancel }) => {
             <ButtonDefault
               text="Cancelar conteo"
               disabled={value?.length > 0 ? false : true}
-              classNameButton="rounded-[32px] h-[54px] bg-[#FF1130] shadow-buttonCount w-full max-w-[400px] mx-auto flex items-center justify-center cursor-pointer"
-              classNameSpan="text-white font-inter font-bold text-[18px]"
+              classNameButton={`rounded-[32px] h-[54px] shadow-buttonCount w-full max-w-[400px] mx-auto flex items-center justify-center cursor-pointer ${
+                value?.length > 20 ? "bg-[#FF1130]" : "bg-[#E8E8E8]"
+              }`}
+              classNameSpan={`${
+                value?.length > 20 ? "text-white" : "text-[#A6A6A6]"
+              } font-inter font-bold text-[18px]`}
               onClick={() => {
                 handleReasonCancel(value);
                 handleClose();

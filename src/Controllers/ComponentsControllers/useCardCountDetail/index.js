@@ -1,4 +1,5 @@
 import cancel from "../../../Assets/cancelCircle.png";
+import arrow from "../../../Assets/arrowWhiteUp.png";
 import clock from "../../../Assets/Clock.png";
 import truckDisabled from "../../../Assets/TruckWhite.png";
 import truck from "../../../Assets/TruckCeleste.png";
@@ -28,6 +29,13 @@ const useCardCountDetail = () => {
       bottom: "text-white",
       imgBottom: truckDisabled,
       img: cancel,
+    },
+    4: {
+      text: "Por enviar",
+      style: "bg-white text-[#19418E]",
+      styleSap: "bg-[#016399] text-white",
+      imgBottom: truck,
+      img: arrow,
     },
   };
 

@@ -63,7 +63,7 @@ const CardSkuSuccesful = ({
           </div>
           <div className="flex self-center">
             <img
-              src={state === 3 ? editGray : edit}
+              src={state === 2 || state === 3 || state === 4 ? editGray : edit}
               alt="edit icon"
               className="h-[24px] w-[24px] cursor-pointer"
               onClick={() => onClickEdit && onClickEdit(name, number)}
@@ -152,7 +152,7 @@ const CardSkuSuccesful = ({
             </h5>
           </div>
           <img
-            src={state === 3 ? trashGray : trash}
+            src={state === 2 || state === 3 || state === 4 ? trashGray : trash}
             alt="edit icon"
             className="h-[24px] w-[24px] cursor-pointer"
             onClick={() => onClickDelete && onClickDelete(number)}

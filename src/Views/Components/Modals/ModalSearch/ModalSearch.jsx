@@ -11,9 +11,11 @@ const ModalSearch = ({
   type,
   suggestions,
   handleUpdateSuggestions,
+  onclickAdd,
+  maxLength,
 }) => {
   const navigate = useNavigate();
-  const { Filter, CardCount, SuggestLine } = useComponents();
+  const { Filter, CardCount, SuggestLine, CardSkuCount } = useComponents();
   const [value, setValue] = useState("");
 
   return (
@@ -22,14 +24,16 @@ const ModalSearch = ({
         <Filter
           icon={clear}
           handleChange={(e) => {
-            handleChange(e);
-            setValue(e.target.value);
+            if (e.target.value.length <= (maxLength ?? 12)) {
+              handleChange(e);
+              setValue(e.target.value);
+            }
           }}
           placeholder="Buscar SKU..."
           value={value}
           classNameContainer={`!bg-[#E8E8E8] ${
-            array.length === 0 &&
-            value.length > 0 &&
+            array?.length === 0 &&
+            value?.length > 0 &&
             "border-[#FF1130] border-[2px] border-solid"
           }`}
           classNameInput="!bg-[#E8E8E8]"
@@ -64,7 +68,7 @@ const ModalSearch = ({
         )}
 
         {value.length > 0 && (
-          <h2 className="font-inter font-normal text-[12px] text-[#797979] px-[16px] mx-auto max-w-[400px] mb-[16px]">
+          <h2 className="font-inter font-normal text-[12px] text-[#797979] px-[16px] mx-auto max-w-[400px] my-[16px]">
             Resultados de tu búsqueda
           </h2>
         )}
@@ -104,6 +108,24 @@ const ModalSearch = ({
                 onClick={() => {
                   handleUpdateSuggestions(array[0]?.form?.route);
                   navigate(`/detail/${count?.id}`);
+                }}
+              />
+            ))}
+
+          {type === 2 &&
+            array?.map((sku, i) => (
+              <CardSkuCount
+                key={sku}
+                index={i}
+                number={sku}
+                name="Modelo especial BT 6 Pack 24/355 ml RD"
+                measure="PCE"
+                onClick={() => {
+                  handleUpdateSuggestions(sku);
+                  const e = { target: { value: "" } };
+                  handleChange(e);
+                  onclickAdd(sku, "Modelo especial BT 6 Pack 24/355 ml RD");
+                  setOpenModalSearch(false);
                 }}
               />
             ))}

@@ -2,7 +2,7 @@ import add from "../../../../Assets/AddSymbol.png";
 
 const CardSkuCount = ({ number, name, measure, index, onClick }) => {
   return (
-    <div className="flex max-w-[400px] mx-auto justify-center px-[16px] pb-[16px] border-b-[1px] border-solid border-[#E8E8E8] mt-[20px]">
+    <div className="flex max-w-[400px] w-[95%] mx-auto justify-center px-[16px] pb-[16px] border-b-[1px] border-solid border-[#E8E8E8] mt-[20px]">
       <div className="flex flex-col grow">
         <h3
           className={`font-inter font-bold text-[10px] text-[#016399] ${

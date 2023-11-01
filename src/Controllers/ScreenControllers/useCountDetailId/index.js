@@ -164,6 +164,18 @@ const useCountDetailId = () => {
     navigate("/count");
   };
 
+  const onClickEdit = (status) => {
+    if (status !== 2 && status !== 3 && status !== 4) {
+      setStep(2);
+    }
+  };
+
+  const onClickDelete = (status) => {
+    if (status !== 2 && status !== 3 && status !== 4) {
+      setStep(2);
+    }
+  };
+
   return {
     open,
     setOpen,
@@ -180,6 +192,8 @@ const useCountDetailId = () => {
     handleStep,
     id,
     submitForm,
+    onClickEdit,
+    onClickDelete,
   };
 };
 

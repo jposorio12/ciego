@@ -5,26 +5,39 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { CountDetailSelector } from "../../../Redux/Slices/CountDetail";
 import { updateForm } from "../../../Redux/Slices/CountDetail";
+import {
+  updateFilterSkus,
+  FilterSelector,
+} from "../../../Redux/Slices/Filters";
+import useUtils from "../../../Utils";
 
 const useStepTwo = () => {
   const [data, setData] = useState({});
   const [openBay, setOpenBay] = useState(false);
   const [openModalSearch, setOpenModalSearch] = useState(false);
   const [skus, setSkus] = useState(["12", "11", "10", "9"]);
+  const [match, setMatch] = useState([]);
   const [openBayCount, setOpenBayCount] = useState(false);
   const { id, counts } = useSelector(CountDetailSelector);
+  const { filterSkus } = useSelector(FilterSelector);
   const dispatch = useDispatch();
+  const { FormatDate } = useUtils();
+  const { dateInline } = FormatDate();
 
   const StepTwoSchema = yup.object({
     bay: yup.string().required("Debes seleccionar una bahía"),
-    quantity: yup.number().positive().required(),
+    quantity: yup.number().positive(),
     fault: yup.number().positive(),
     faultOption: yup.string().when("fault", {
       is: (value) => value && value > 0,
       then: yup.string().required(),
       otherwise: yup.string().notRequired(),
     }),
-    measure: yup.string().required(),
+    measure: yup.string().when("quantity", {
+      is: (value) => value && value > 0,
+      then: yup.string().required(),
+      otherwise: yup.string().notRequired(),
+    }),
   });
 
   const StepTwoForm = useForm({
@@ -67,15 +80,21 @@ const useStepTwo = () => {
     dispatch(updateForm([...elements, newElement]));
   };
 
-  const handleChangeFilter = ({ target }) => {
-    if (target.value?.length !== 0) {
-      const match = skus?.filter((sku) =>
-        sku.toString().includes(target.value.toString())
-      );
-      setSkus(match);
+  const handleChangeFilter = ({ target: { value } }) => {
+    const filterSkus = skus?.filter((sku) =>
+      sku.toString()?.includes(value.toString())
+    );
+    if (value === "") {
+      setMatch([]);
     } else {
-      setSkus(["12", "11", "10", "9"]);
+      setMatch(filterSkus);
     }
+  };
+
+  const handleUpdateSuggestions = (valueItem) => {
+    const filter = filterSkus?.filter(({ value }) => value !== valueItem);
+    const object = { value: valueItem, date: dateInline() };
+    dispatch(updateFilterSkus([...filter, object]));
   };
 
   return {
@@ -94,6 +113,9 @@ const useStepTwo = () => {
     onClickDelete,
     openModalSearch,
     setOpenModalSearch,
+    handleUpdateSuggestions,
+    filterSkus,
+    match,
   };
 };
 

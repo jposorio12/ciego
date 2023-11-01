@@ -21,10 +21,11 @@ const Count = () => {
     match,
     handleUpdateSuggestions,
     filterCounts,
+    handleLogOut,
   } = useCount();
 
   return (
-    <PrivateLayout Header={<HeaderCount />}>
+    <PrivateLayout Header={<HeaderCount handleLogOut={handleLogOut} />}>
       {arrayCounts?.length > 0 && (
         <>
           <h2 className="font-inter font-bold text-[14px] mt-[8px] px-[16px] mx-auto max-w-[400px] text-[#0C2047]">
@@ -46,6 +47,7 @@ const Count = () => {
           type={1}
           handleUpdateSuggestions={handleUpdateSuggestions}
           suggestions={filterCounts}
+          maxLength={12}
         />
       )}
 
@@ -56,7 +58,7 @@ const Count = () => {
       >
         {arrayCounts?.length > 0 ? (
           <>
-            {arrayCounts?.map((count) => (
+            {arrayCounts?.toReversed()?.map((count) => (
               <CardCount
                 key={count?.id}
                 numberRoute={count?.form?.route}

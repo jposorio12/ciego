@@ -32,6 +32,9 @@ const StepTwo = ({ steps, submitForm }) => {
     onClickDelete,
     openModalSearch,
     setOpenModalSearch,
+    handleUpdateSuggestions,
+    filterSkus,
+    match,
   } = useStepTwo();
 
   const {
@@ -58,7 +61,15 @@ const StepTwo = ({ steps, submitForm }) => {
       />
 
       {openModalSearch && (
-        <ModalSearch setOpenModalSearch={setOpenModalSearch} />
+        <ModalSearch
+          setOpenModalSearch={setOpenModalSearch}
+          handleChange={handleChangeFilter}
+          array={match}
+          type={2}
+          handleUpdateSuggestions={handleUpdateSuggestions}
+          suggestions={filterSkus}
+          onclickAdd={onclickAdd}
+        />
       )}
 
       {skusSelected?.map(

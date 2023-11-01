@@ -22,14 +22,18 @@ const useStepTwoDetail = () => {
 
   const StepTwoDetailSchema = yup.object({
     bay: yup.string().required("Debes seleccionar una bahía"),
-    quantity: yup.number().positive().required(),
+    quantity: yup.number().positive(),
     fault: yup.number().positive(),
     faultOption: yup.string().when("fault", {
       is: (value) => value && value > 0,
       then: yup.string().required(),
       otherwise: yup.string().notRequired(),
     }),
-    measure: yup.string().required(),
+    measure: yup.string().when("quantity", {
+      is: (value) => value && value > 0,
+      then: yup.string().required(),
+      otherwise: yup.string().notRequired(),
+    }),
   });
 
   const StepTwoDetailForm = useForm({

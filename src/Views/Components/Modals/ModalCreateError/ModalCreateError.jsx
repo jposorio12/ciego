@@ -15,7 +15,7 @@ const ModalCreateError = ({
 
   return (
     <div className="fixed top-0 bottom-0 left-0 right-0 bg-[#202020b3] backdrop-blur-sm z-[2]">
-      <div className="relative w-full h-full bg-no-repeat bg-cover cursor-pointer bg-background">
+      <div className="relative w-full h-full bg-no-repeat bg-cover cursor-pointer bg-background overflow-auto">
         <img
           src={arrow}
           alt="arrow"
@@ -27,7 +27,7 @@ const ModalCreateError = ({
         />
         <img
           src={icon}
-          alt="succes"
+          alt="error"
           className="w-[195px] h-auto pt-[150px] mx-auto"
         />
         <h1 className="font-inter font-bold text-[32px] text-white mx-auto text-center leading-[40px] my-[16px] px-[12px]">

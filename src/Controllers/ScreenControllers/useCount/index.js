@@ -9,6 +9,7 @@ import {
   CountDetailSelector,
   updateId,
 } from "../../../Redux/Slices/CountDetail";
+import { logOut } from "../../../Redux/Slices/Login";
 import useUtils from "../../../Utils";
 
 const useCount = () => {
@@ -49,6 +50,10 @@ const useCount = () => {
     dispatch(updateFilterCounts([...filter, object]));
   };
 
+  const handleLogOut = () => {
+    dispatch(logOut());
+  };
+
   return {
     navigate,
     arrayCounts,
@@ -59,6 +64,7 @@ const useCount = () => {
     match,
     handleUpdateSuggestions,
     filterCounts,
+    handleLogOut,
   };
 };
 
